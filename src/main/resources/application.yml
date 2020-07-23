@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: '!Cint@2019#hz'
+    url: jdbc:mysql://mariadb.cintsoft.com:3308/application?useUnicode=true&characterEncoding=utf8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true
+  servlet:
+    multipart:
+      max-file-size: 500MB
+      max-request-size: 500MB
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+jwt:
+  secret: cintsoft
+  expiration: 7200
