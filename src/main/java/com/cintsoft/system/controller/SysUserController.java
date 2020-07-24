@@ -29,7 +29,7 @@ public class SysUserController {
     @Resource
     private SysUserService sysUserService;
 
-//    @PreAuthorize("isAuthenticated()")
+    @PreAuthorize("@cintSecurity.hasPermission('/sysUser/list')")
     @GetMapping("/list")
     public ResultBean<List<SysUser>> list() {
         return ResultBean.restResult(sysUserService.list(), ErrorCodeInfo.OK);

@@ -37,7 +37,7 @@ public class SysRole implements Serializable {
     private String name;
 
     @ApiModelProperty(value = "角色标识符")
-    private String key;
+    private String roleKey;
 
     @ApiModelProperty(value = "权重")
     private Integer weight;

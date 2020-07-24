@@ -36,7 +36,7 @@ public class SysResource implements Serializable, GrantedAuthority {
     private String name;
 
     @ApiModelProperty(value = "资源标识符")
-    private String key;
+    private String resourceKey;
 
     @ApiModelProperty(value = "父资源id")
     private String parentId;
@@ -73,6 +73,6 @@ public class SysResource implements Serializable, GrantedAuthority {
 
     @Override
     public String getAuthority() {
-        return key;
+        return resourceKey;
     }
 }
