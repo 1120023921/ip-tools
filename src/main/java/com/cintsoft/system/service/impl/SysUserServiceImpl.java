@@ -1,6 +1,7 @@
 package com.cintsoft.system.service.impl;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.cintsoft.system.constant.SecurityConstant;
 import com.cintsoft.system.model.SysResource;
 import com.cintsoft.system.model.SysRoleResource;
 import com.cintsoft.system.model.SysRoleUser;
@@ -12,8 +13,10 @@ import com.cintsoft.system.service.SysRoleUserService;
 import com.cintsoft.system.service.SysUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -36,6 +39,8 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     private SysRoleResourceService sysRoleResourceService;
     @Resource
     private SysResourceService sysResourceService;
+    @Resource
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public SysUser loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -54,5 +59,29 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
             }
         }
         return sysUser;
+    }
+
+    @Override
+    public Boolean insert(SysUser sysUser) {
+        //填充用户来源
+        sysUser.setUserSource(SecurityConstant.USER_SOURCE);
+        //密码加密
+        sysUser.setPassword(passwordEncoder.encode(sysUser.getPassword()));
+        return save(sysUser);
+    }
+
+    @Override
+    public Boolean deleteBatch(List<String> idList) {
+        //删除用户角色关联
+        sysRoleUserService.remove(Wrappers.<SysRoleUser>lambdaQuery().in(SysRoleUser::getUserId, idList));
+        return removeByIds(idList);
+    }
+
+    @Override
+    public Boolean update(SysUser sysUser) {
+        if (!StringUtils.isEmpty(sysUser.getPassword())) {
+            sysUser.setPassword(passwordEncoder.encode(sysUser.getPassword()));
+        }
+        return updateById(sysUser);
     }
 }
