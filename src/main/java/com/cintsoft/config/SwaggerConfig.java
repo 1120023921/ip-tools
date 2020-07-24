@@ -13,7 +13,7 @@ import java.util.Collections;
 
 /**
  * @author 胡昊
- * Description: Mybatis配置
+ * Description: Swagger配置
  * Date: 2020/7/23
  * Time: 21:21
  * Mail: huhao9277@gmail.com
