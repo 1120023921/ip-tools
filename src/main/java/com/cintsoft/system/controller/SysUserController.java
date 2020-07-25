@@ -40,7 +40,7 @@ public class SysUserController {
      * @date 2020/7/24 13:28
      */
     @ApiOperation("新增用户")
-    @PreAuthorize("@cintSecurity.hasPermission('/sysUser/insert')")
+    @PreAuthorize("@cintSecurity.hasPermission('sysUser:insert')")
     @PostMapping("/insert")
     public ResultBean<Boolean> insert(@RequestBody SysUser sysUser) {
         //参数校验
@@ -56,7 +56,7 @@ public class SysUserController {
      * @date 2020/7/24 13:51
      */
     @ApiOperation("批量删除用户")
-    @PreAuthorize("@cintSecurity.hasPermission('/sysUser/deleteBatch')")
+    @PreAuthorize("@cintSecurity.hasPermission('sysUser:deleteBatch')")
     @DeleteMapping("/deleteBatch")
     public ResultBean<Boolean> deleteBatch(@RequestBody List<String> idList) {
         //参数校验
@@ -72,7 +72,7 @@ public class SysUserController {
      * @date 2020/7/24 15:25
      */
     @ApiOperation("更新用户")
-    @PreAuthorize("@cintSecurity.hasPermission('/sysUser/update')")
+    @PreAuthorize("@cintSecurity.hasPermission('sysUser:update')")
     @PatchMapping("/update")
     public ResultBean<Boolean> update(@RequestBody SysUser sysUser) {
         //参数校验
@@ -90,10 +90,10 @@ public class SysUserController {
      * @date 2020/7/24 15:39
      */
     @ApiOperation("分页查询用户")
-    @PreAuthorize("@cintSecurity.hasPermission('/sysUser/list')")
-    @PostMapping("/list")
-    public ResultBean<Page<SysUser>> list(@RequestParam(defaultValue = "1") Integer pageNum, @RequestParam(defaultValue = "10") Integer pageSize, @RequestBody SysUser sysUser) {
-        return ResultBean.restResult(sysUserService.page(new Page<>(pageNum, pageSize), Wrappers.lambdaQuery(sysUser).select(i -> !"password".equals(i.getProperty()))), ErrorCodeInfo.OK);
+    @PreAuthorize("@cintSecurity.hasPermission('sysUser:page')")
+    @PostMapping("/page")
+    public ResultBean<Page<SysUser>> page(@RequestParam(defaultValue = "1") Integer pageNum, @RequestParam(defaultValue = "10") Integer pageSize, @RequestBody SysUser sysUser) {
+        return ResultBean.restResult(sysUserService.page(new Page<>(pageNum, pageSize), Wrappers.lambdaQuery(sysUser).select(i -> !"password".equals(i.getProperty())).orderByDesc(SysUser::getCreateTime)), ErrorCodeInfo.OK);
     }
 }
 

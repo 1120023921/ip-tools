@@ -3,6 +3,7 @@ package com.cintsoft.security;
 import com.cintsoft.common.utils.jwt.JwtTokenUtil;
 import com.cintsoft.security.filter.JwtLoginFilter;
 import com.cintsoft.security.filter.JwtVerifyFilter;
+import com.cintsoft.security.handler.MyAccessDeniedHandler;
 import com.cintsoft.security.handler.MyAuthenticationFailureHandler;
 import com.cintsoft.system.model.SysUser;
 import com.cintsoft.system.service.SysUserService;
@@ -39,8 +40,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private PasswordEncoder passwordEncoder;
     @Resource
     private JwtTokenUtil<SysUser> jwtTokenUtil;
-    @Resource
-    private MyAuthenticationFailureHandler myAuthenticationFailureHandler;
 
     @Bean
     public PasswordEncoder bCryptPasswordEncoder() {
@@ -65,7 +64,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilterBefore(new JwtLoginFilter(authenticationManager(), jwtTokenUtil), UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(new JwtVerifyFilter(jwtTokenUtil), BasicAuthenticationFilter.class)
                 .exceptionHandling()
-                .authenticationEntryPoint(myAuthenticationFailureHandler)
+                .authenticationEntryPoint(new MyAuthenticationFailureHandler())
+                .accessDeniedHandler(new MyAccessDeniedHandler())
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }

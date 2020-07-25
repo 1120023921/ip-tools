@@ -14,7 +14,9 @@ public enum BusinessCode {
     ID_LIST_EMPTY_ERROR(30001, "ID列表不能为空"),
     USERNAME_EMPTY_ERROR(30002, "ID列表不能为空"),
     PASSWORD_EMPTY_ERROR(30003, "密码不能为空"),
-    ID_EMPTY_ERROR(30004, "ID不能为空");
+    ID_EMPTY_ERROR(30004, "ID不能为空"),
+    ROLE_NAME_EMPTY_ERROR(30005, "角色名称不能为空"),
+    ROLE_KEY_EMPTY_ERROR(30006, "角色标识符不能为空");
 
     private final Integer code;
     private final String msg;
