@@ -63,16 +63,16 @@ public class SysUser implements Serializable, UserDetails {
     private String userSource;
 
     @ApiModelProperty(value = "账户名是否过期 0-未过期 1-已过期")
-    private Integer accountNonExpired;
+    private Boolean isAccountNonExpired;
 
     @ApiModelProperty(value = "账户是否锁定 0-未锁定 1-已锁定")
-    private Integer accountNonLocked;
+    private Boolean isAccountNonLocked;
 
     @ApiModelProperty(value = "凭据是否过期 0-未过期 1-已过期")
-    private Integer credentialsNonExpired;
+    private Boolean isCredentialsNonExpired;
 
     @ApiModelProperty(value = "状态 0-禁用 1-启用")
-    private Integer enabled;
+    private Boolean isEnabled;
 
     @ApiModelProperty(value = "权重")
     private Integer weight;
@@ -114,21 +114,21 @@ public class SysUser implements Serializable, UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return accountNonExpired.equals(1);
+        return isAccountNonExpired;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return accountNonLocked.equals(1);
+        return isAccountNonLocked;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return credentialsNonExpired.equals(1);
+        return isCredentialsNonExpired;
     }
 
     @Override
     public boolean isEnabled() {
-        return enabled.equals(1);
+        return isEnabled;
     }
 }

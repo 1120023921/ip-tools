@@ -4,12 +4,15 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.service.ApiInfo;
-import springfox.documentation.service.Contact;
+import springfox.documentation.service.*;
 import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
 
 import java.util.Collections;
+import java.util.List;
+
+import static java.util.Collections.singletonList;
 
 /**
  * @author 胡昊
@@ -28,7 +31,9 @@ public class SwaggerConfig {
                 .apis(RequestHandlerSelectors.any())
                 .paths(PathSelectors.any())
                 .build()
-                .apiInfo(apiInfo());
+                .apiInfo(apiInfo())
+                .securitySchemes(singletonList(apiKey()))
+                .securityContexts(singletonList(securityContext()));
     }
 
     private ApiInfo apiInfo() {
@@ -39,5 +44,22 @@ public class SwaggerConfig {
                 "http://cintsoft.com",
                 new Contact("胡昊", "http://cintsoft.com", "huhao9277@gmail.com"),
                 "Apache", "http://www.apache.org/", Collections.emptyList());
+    }
+
+    private ApiKey apiKey() {
+        return new ApiKey("Authorzation", "Authorzation", "header");
+    }
+
+    private SecurityContext securityContext() {
+        return SecurityContext.builder()
+                .securityReferences(defaultAuth())
+                .build();
+    }
+
+    List<SecurityReference> defaultAuth() {
+        final AuthorizationScope authorizationScope = new AuthorizationScope("global", "accessEverything");
+        final AuthorizationScope[] authorizationScopes = new AuthorizationScope[1];
+        authorizationScopes[0] = authorizationScope;
+        return singletonList(new SecurityReference("Authorzation", authorizationScopes));
     }
 }
