@@ -15,6 +15,7 @@ import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -53,6 +54,7 @@ public class SysResourceServiceImpl extends ServiceImpl<SysResourceMapper, SysRe
         final List<SysResourceView> sysResourceViewList = allSysResourceList
                 .stream()
                 .filter(sysResource -> sysResource.getParentId().equals("0"))
+                .sorted(Comparator.comparingLong(SysResource::getCreateTime).reversed())
                 .map(sysResource -> {
                     final SysResourceView sysResourceView = new SysResourceView();
                     BeanUtils.copyProperties(sysResource, sysResourceView);
@@ -70,6 +72,7 @@ public class SysResourceServiceImpl extends ServiceImpl<SysResourceMapper, SysRe
             final List<SysResourceView> childSysResourceViewList = allSysResourceList
                     .stream()
                     .filter(sysResource -> sysResource.getParentId().equals(sysResourceView.getId()))
+                    .sorted(Comparator.comparingLong(SysResource::getCreateTime).reversed())
                     .map(sysResource -> {
                         final SysResourceView childSysResourceView = new SysResourceView();
                         BeanUtils.copyProperties(sysResource, childSysResourceView);
@@ -89,7 +92,7 @@ public class SysResourceServiceImpl extends ServiceImpl<SysResourceMapper, SysRe
         if (sysResource != null) {
             result.add(sysResource);
         }
-        final List<SysResource> sysResourceList = list(Wrappers.<SysResource>lambdaQuery().eq(SysResource::getParentId, id));
+        final List<SysResource> sysResourceList = list(Wrappers.<SysResource>lambdaQuery().eq(SysResource::getParentId, id).orderByDesc(SysResource::getCreateTime));
         if (!CollectionUtils.isEmpty(sysResourceList)) {
             listChildResource(sysResourceList, result);
         }
@@ -98,7 +101,7 @@ public class SysResourceServiceImpl extends ServiceImpl<SysResourceMapper, SysRe
 
     private void listChildResource(List<SysResource> sysResourceList, List<SysResource> result) {
         result.addAll(sysResourceList);
-        final List<SysResource> childSysResourceList = list(Wrappers.<SysResource>lambdaQuery().in(SysResource::getParentId, sysResourceList.stream().map(SysResource::getId).collect(Collectors.toList())));
+        final List<SysResource> childSysResourceList = list(Wrappers.<SysResource>lambdaQuery().in(SysResource::getParentId, sysResourceList.stream().map(SysResource::getId).collect(Collectors.toList())).orderByDesc(SysResource::getCreateTime));
         if (!CollectionUtils.isEmpty(childSysResourceList)) {
             listChildResource(childSysResourceList, result);
         }
