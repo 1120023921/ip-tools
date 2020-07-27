@@ -18,7 +18,7 @@ public class CintSecurity {
     public boolean hasPermission(String permission) {
         final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         for (GrantedAuthority grantedAuthority : authentication.getAuthorities()) {
-            if (permission.equals(grantedAuthority.getAuthority())) {
+            if (permission.equals(grantedAuthority.getAuthority()) || "INNER_USER".equals(grantedAuthority.getAuthority())) {
                 return true;
             }
         }

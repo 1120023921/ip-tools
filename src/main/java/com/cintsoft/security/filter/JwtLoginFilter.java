@@ -5,16 +5,13 @@ import com.cintsoft.common.enums.ErrorCodeInfo;
 import com.cintsoft.common.utils.jwt.JwtTokenUtil;
 import com.cintsoft.common.vo.ResultBean;
 import com.cintsoft.system.model.SysUser;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.authentication.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -68,12 +65,20 @@ public class JwtLoginFilter extends AbstractAuthenticationProcessingFilter {
     }
 
     @Override
-    protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException {
+    protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException {
         response.setCharacterEncoding("UTF-8");
         response.setHeader("Content-Type", "application/json");
         final PrintWriter out = response.getWriter();
-        if (failed instanceof BadCredentialsException) {
+        if (failed instanceof BadCredentialsException || failed instanceof ProviderNotFoundException) {
             out.write(JSONUtil.toJsonPrettyStr(ResultBean.restResult(failed.getMessage(), 500, "用户名密码错误")));
+        } else if (failed instanceof LockedException) {
+            out.write(JSONUtil.toJsonPrettyStr(ResultBean.restResult(failed.getMessage(), 500, "账户已锁定")));
+        } else if (failed instanceof DisabledException) {
+            out.write(JSONUtil.toJsonPrettyStr(ResultBean.restResult(failed.getMessage(), 500, "账户已禁用")));
+        } else if (failed instanceof AccountExpiredException) {
+            out.write(JSONUtil.toJsonPrettyStr(ResultBean.restResult(failed.getMessage(), 500, "用户名已过期")));
+        } else if (failed instanceof CredentialsExpiredException) {
+            out.write(JSONUtil.toJsonPrettyStr(ResultBean.restResult(failed.getMessage(), 500, "密码已过期")));
         }
         out.flush();
         out.close();
