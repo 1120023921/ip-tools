@@ -21,7 +21,9 @@ public enum BusinessCode {
     RESOURCE_KEY_EMPTY_ERROR(30008, "资源标识符不能为空"),
     PARENT_ID_EMPTY_ERROR(30009, "父id不能为空"),
     USER_ID_EMPTY_ERROR(30010, "用户id不能为空"),
-    ROLE_ID_LIST_NOT_EXIST_ERROR(30011, "角色id列表不存在");
+    ROLE_ID_LIST_NOT_EXIST_ERROR(30011, "角色id列表不存在"),
+    ROLE_ID_EMPTY_ERROR(30012, "角色id不能为空"),
+    RESOURCE_ID_LIST_NOT_EXIST_ERROR(30013, "资源id列表不存在");
 
     private final Integer code;
     private final String msg;
