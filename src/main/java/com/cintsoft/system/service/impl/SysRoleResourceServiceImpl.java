@@ -1,8 +1,10 @@
 package com.cintsoft.system.service.impl;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.cintsoft.system.model.SysResource;
 import com.cintsoft.system.model.SysRoleResource;
 import com.cintsoft.system.dao.SysRoleResourceMapper;
+import com.cintsoft.system.service.SysResourceService;
 import com.cintsoft.system.service.SysRoleResourceService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.cintsoft.system.vo.UserRoleResourceVo;
@@ -10,7 +12,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,6 +29,9 @@ import java.util.stream.Collectors;
 @Transactional
 @Service
 public class SysRoleResourceServiceImpl extends ServiceImpl<SysRoleResourceMapper, SysRoleResource> implements SysRoleResourceService {
+
+    @Resource
+    private SysResourceService sysResourceService;
 
     @Override
     public Boolean saveRoleResource(UserRoleResourceVo userRoleResourceVo) {
@@ -51,5 +58,17 @@ public class SysRoleResourceServiceImpl extends ServiceImpl<SysRoleResourceMappe
             sysRoleResourceListNew.add(sysRoleResource);
         });
         return saveBatch(sysRoleResourceListNew);
+    }
+
+    @Override
+    public List<SysResource> listRoleResource(String roleId) {
+        final List<String> resourceIdList = list(Wrappers.<SysRoleResource>lambdaQuery().eq(SysRoleResource::getRoleId, roleId))
+                .stream()
+                .map(SysRoleResource::getResourceId)
+                .collect(Collectors.toList());
+        if (CollectionUtils.isEmpty(resourceIdList)) {
+            return Collections.emptyList();
+        }
+        return sysResourceService.listByIds(resourceIdList);
     }
 }
