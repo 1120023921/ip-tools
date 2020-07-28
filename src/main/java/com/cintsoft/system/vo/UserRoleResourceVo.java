@@ -24,4 +24,6 @@ public class UserRoleResourceVo {
 
     private String userId;
     private List<String> userIdList;
+
+    private List<String> menuIdList;
 }

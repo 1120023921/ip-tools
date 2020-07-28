@@ -29,7 +29,8 @@ public enum BusinessCode {
     MENU_PATH_EMPTY_ERROR(30016, "菜单路径不能为空"),
     MENU_ICON_EMPTY_ERROR(30017, "菜单图标不能为空"),
     PARENT_ID_NOT_EXIST_ERROR(30018, "父id不存在"),
-    MENU_ID_EMPTY_ERROR(30019, "菜单id不能为空");
+    MENU_ID_EMPTY_ERROR(30019, "菜单id不能为空"),
+    MENU_ID_LIST_NOT_EXIST_ERROR(30020, "菜单id列表不存在");
 
     private final Integer code;
     private final String msg;
