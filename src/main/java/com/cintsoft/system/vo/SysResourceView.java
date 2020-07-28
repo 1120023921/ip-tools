@@ -17,6 +17,6 @@ import java.util.List;
 @Data
 @EqualsAndHashCode(callSuper = false)
 public class SysResourceView extends SysResource {
-    //子资源列表ß
+    //子资源列表
     private List<SysResourceView> children = Collections.emptyList();
 }

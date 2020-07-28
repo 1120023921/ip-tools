@@ -36,4 +36,11 @@ public class SysMenuValidator extends BaseValidator {
             throw new ParameterValidateException(BusinessCode.PARENT_ID_NOT_EXIST_ERROR);
         }
     }
+
+    public static void updateValidate(SysMenu sysMenu, SysMenuService sysMenuService) {
+        if (StringUtils.isEmpty(sysMenu.getId())) {
+            throw new ParameterValidateException(BusinessCode.MENU_ID_EMPTY_ERROR);
+        }
+        insert(sysMenu, sysMenuService);
+    }
 }
