@@ -16,3 +16,6 @@ mybatis-plus:
 jwt:
   secret: cintsoft
   expiration: 7200
+web:
+  upload: file:D:/
+  mapping: /file/**
