@@ -24,4 +24,13 @@ public class SysRoleUserValidator extends BaseValidator {
             throw new ParameterValidateException(BusinessCode.ROLE_ID_LIST_NOT_EXIST_ERROR);
         }
     }
+
+    public static void saveRoleUserValidate(UserRoleResourceVo userRoleResourceVo) {
+        if (StringUtils.isEmpty(userRoleResourceVo.getRoleId())) {
+            throw new ParameterValidateException(BusinessCode.ROLE_ID_EMPTY_ERROR);
+        }
+        if (userRoleResourceVo.getUserIdList() == null) {
+            throw new ParameterValidateException(BusinessCode.USER_ID_LIST_NOT_EXIST_ERROR);
+        }
+    }
 }

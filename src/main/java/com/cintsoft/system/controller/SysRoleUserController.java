@@ -6,6 +6,7 @@ import com.cintsoft.common.exception.BusinessCode;
 import com.cintsoft.common.exception.ParameterValidateException;
 import com.cintsoft.common.vo.ResultBean;
 import com.cintsoft.system.model.SysRole;
+import com.cintsoft.system.model.SysUser;
 import com.cintsoft.system.service.SysRoleUserService;
 import com.cintsoft.system.validator.sys.roleuser.SysRoleUserValidator;
 import com.cintsoft.system.vo.UserRoleResourceVo;
@@ -65,6 +66,39 @@ public class SysRoleUserController {
             throw new ParameterValidateException(BusinessCode.USER_ID_EMPTY_ERROR);
         }
         return ResultBean.restResult(sysRoleUserService.listUserRole(userId), ErrorCodeInfo.OK);
+    }
+
+    /**
+     * @param userRoleResourceVo 角色用户参数
+     * @description 保存角色用户
+     * @author 胡昊
+     * @email huhao9277@gmail.com
+     * @date 2020/8/7 16:43:05
+     */
+    @ApiOperation("保存角色用户")
+    @PreAuthorize("@cintSecurity.hasPermission('sysRoleUser:saveRoleUser')")
+    @GetMapping("/saveRoleUser")
+    public ResultBean<Boolean> saveRoleUser(@RequestBody UserRoleResourceVo userRoleResourceVo) {
+        //参数校验
+        SysRoleUserValidator.saveRoleUserValidate(userRoleResourceVo);
+        return ResultBean.restResult(sysRoleUserService.saveRoleUser(userRoleResourceVo), ErrorCodeInfo.OK);
+    }
+
+    /**
+     * @param roleId 角色id
+     * @description 获取角色下用户
+     * @author 胡昊
+     * @email huhao9277@gmail.com
+     * @date 2020/8/7 16:32:47
+     */
+    @ApiOperation("获取角色下用户")
+    @PreAuthorize("@cintSecurity.hasPermission('sysRoleUser:listRoleUser')")
+    @GetMapping("/listRoleUser")
+    public ResultBean<List<SysUser>> listRoleUser(String roleId) {
+        if (StringUtils.isEmpty(roleId)) {
+            throw new ParameterValidateException(BusinessCode.ROLE_ID_EMPTY_ERROR);
+        }
+        return ResultBean.restResult(sysRoleUserService.listRoleUser(roleId), ErrorCodeInfo.OK);
     }
 }
 

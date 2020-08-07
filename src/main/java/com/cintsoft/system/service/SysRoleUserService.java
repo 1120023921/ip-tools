@@ -3,6 +3,7 @@ package com.cintsoft.system.service;
 import com.cintsoft.system.model.SysRole;
 import com.cintsoft.system.model.SysRoleUser;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.cintsoft.system.model.SysUser;
 import com.cintsoft.system.vo.UserRoleResourceVo;
 
 import java.util.List;
@@ -34,4 +35,22 @@ public interface SysRoleUserService extends IService<SysRoleUser> {
      * @date 2020/7/27 9:56
      */
     List<SysRole> listUserRole(String userId);
+
+    /**
+     * @param userRoleResourceVo 角色用户参数
+     * @description 保存角色用户
+     * @author 胡昊
+     * @email huhao9277@gmail.com
+     * @date 2020/8/7 16:43:05
+     */
+    Boolean saveRoleUser(UserRoleResourceVo userRoleResourceVo);
+
+    /**
+     * @param roleId 角色id
+     * @description 获取角色下用户
+     * @author 胡昊
+     * @email huhao9277@gmail.com
+     * @date 2020/8/7 16:32:47
+     */
+    List<SysUser> listRoleUser(String roleId);
 }
