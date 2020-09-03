@@ -28,53 +28,64 @@ public class ArticleTypeController {
     private ArticleTypeService articleTypeService;
 
     /**
-     * 吴高耀
-     * 后台插入文章类型信息
-     *
-     * @param articleType
-     * @return
+     * @description 前端获取所有文章类型信息
+     * @author 吴高耀
+     * @email 709581924@qq.com
+     * @date 2020/9/3 15:24
      */
-    @PostMapping(value = "/insert")
+    @GetMapping("/front-list")
+    public ResultBean<List<ArticleType>> frontList() {
+        return ResultBean.restResult(articleTypeService.list(), ErrorCodeInfo.OK);
+    }
+
+    /**
+     * @param articleType 文章类型信息
+     * @description 后台插入文章类型信息
+     * @author 吴高耀
+     * @email 709581924@qq.com
+     * @date 2020/9/3 15:26
+     */
+    @PostMapping("/insert")
     public ResultBean<Boolean> insert(@RequestBody ArticleType articleType) {
         ArticleTypeValidator.insert(articleType);
         return articleTypeService.saveArticleType(articleType);
     }
 
     /**
-     * 吴高耀
-     * 后台更新文章类型信息
-     *
-     * @param articleType
-     * @return
+     * @param articleType 文章类型信息
+     * @description 后台更新文章类型信息
+     * @author 吴高耀
+     * @email 709581924@qq.com
+     * @date 2020/9/3 15:25
      */
-    @PatchMapping(value = "/update")
+    @PatchMapping("/update")
     public ResultBean<Boolean> update(@RequestBody ArticleType articleType) {
         ArticleTypeValidator.update(articleType);
         return articleTypeService.updateArticleType(articleType);
     }
 
     /**
-     * 后台查询所有文章类型信息
-     * 吴高耀
-     *
-     * @return
+     * @description 后台获取所有文章类型信息
+     * @author 吴高耀
+     * @email 709581924@qq.com
+     * @date 2020/9/3 15:24
      */
-    @GetMapping(value = "/list")
+    @GetMapping("/list")
     public ResultBean<List<ArticleType>> list() {
         return ResultBean.restResult(articleTypeService.list(), ErrorCodeInfo.OK);
     }
 
     /**
-     * 后台批量或单个删除文章类型信息
-     * 吴高耀
-     *
-     * @param idList
-     * @return
+     * @param idList 文章类型主键集合
+     * @description 后台批量或单个删除文章类型
+     * @author 吴高耀
+     * @email 709581924@qq.com
+     * @date 2020/9/3 15:24
      */
-    @DeleteMapping(value = "/remove")
+    @DeleteMapping("/remove")
     public ResultBean<Boolean> remove(@RequestBody List<String> idList) {
         ArticleTypeValidator.remove(idList);
-        return ResultBean.restResult(articleTypeService.removeByIds(idList), ErrorCodeInfo.OK);
+        return articleTypeService.removeArticleTypes(idList);
     }
 
 }

@@ -12,6 +12,8 @@ import com.cintsoft.common.exception.BusinessException;
 import com.cintsoft.common.vo.ResultBean;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * <p>
  * 文章分类信息 服务实现类
@@ -53,6 +55,16 @@ public class ArticleTypeServiceImpl extends ServiceImpl<ArticleTypeMapper, Artic
         type.setVersion(articleType.getVersion());
         boolean update = updateById(type);
         if (update) {
+            return ResultBean.restResult(true, ErrorCodeInfo.OK);
+        } else {
+            return ResultBean.restResult(false, ErrorCodeInfo.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @Override
+    public ResultBean<Boolean> removeArticleTypes(List<String> idList) {
+        boolean remove = removeByIds(idList);
+        if (remove) {
             return ResultBean.restResult(true, ErrorCodeInfo.OK);
         } else {
             return ResultBean.restResult(false, ErrorCodeInfo.INTERNAL_SERVER_ERROR);
