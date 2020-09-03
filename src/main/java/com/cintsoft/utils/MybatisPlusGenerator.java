@@ -106,7 +106,7 @@ public class MybatisPlusGenerator {
         strategy.setInclude(scanner("表名"));
 //        strategy.setSuperEntityColumns("id");
         strategy.setControllerMappingHyphenStyle(true);
-        strategy.setTablePrefix("sys_");
+        strategy.setTablePrefix("info_");
         strategy.setVersionFieldName("version");
         strategy.setLogicDeleteFieldName("deleted");
         List<TableFill> tableFillList = new ArrayList<>();
