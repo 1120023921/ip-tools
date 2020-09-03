@@ -56,7 +56,7 @@ public class MybatisPlusGenerator {
 
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://mariadb.cintsoft.com:3308/application?useUnicode=true&characterEncoding=utf-8");
+        dsc.setUrl("jdbc:mysql://mariadb.cintsoft.com:3308/birudj?useUnicode=true&characterEncoding=utf-8");
         // dsc.setSchemaName("public");
         dsc.setDriverName("com.mysql.cj.jdbc.Driver");
         dsc.setUsername("root");
@@ -106,7 +106,7 @@ public class MybatisPlusGenerator {
         strategy.setInclude(scanner("表名"));
 //        strategy.setSuperEntityColumns("id");
         strategy.setControllerMappingHyphenStyle(true);
-        strategy.setTablePrefix("info_");
+        strategy.setTablePrefix("sys_");
         strategy.setVersionFieldName("version");
         strategy.setLogicDeleteFieldName("deleted");
         List<TableFill> tableFillList = new ArrayList<>();
