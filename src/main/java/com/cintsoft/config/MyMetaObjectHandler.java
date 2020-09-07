@@ -25,7 +25,7 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
         this.strictInsertFill(metaObject, "createTime", Long.class, System.currentTimeMillis()); // 起始版本 3.3.0(推荐使用)
         //获取用户信息
         final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication != null && authentication.getPrincipal() != null) {
+        if (authentication != null && authentication.getPrincipal() != null && !"anonymousUser".equals(authentication.getPrincipal())) {
             this.strictInsertFill(metaObject, "createBy", String.class, ((SysUser) authentication.getPrincipal()).getId());
         }
         updateFill(metaObject);
@@ -38,7 +38,7 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
         this.strictUpdateFill(metaObject, "updateTime", Long.class, System.currentTimeMillis()); // 起始版本 3.3.0(推荐使用)
         //获取用户信息
         final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication != null && authentication.getPrincipal() != null) {
+        if (authentication != null && authentication.getPrincipal() != null && !"anonymousUser".equals(authentication.getPrincipal())) {
             this.strictInsertFill(metaObject, "updateBy", String.class, ((SysUser) authentication.getPrincipal()).getId());
         }
     }
