@@ -41,8 +41,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Resource
     private SysUserService sysUserService;
     @Resource
-    private PasswordEncoder passwordEncoder;
-    @Resource
     private JwtTokenUtil<SysUser> jwtTokenUtil;
 
     @Bean
@@ -71,6 +69,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public AuthenticationManager authenticationManager() {
-        return new ProviderManager(Arrays.asList(new MyDaoAuthenticationProvider(sysUserService, passwordEncoder), new MyInMemoryAuthenticationProvider(passwordEncoder)));
+        return new ProviderManager(Arrays.asList(new MyDaoAuthenticationProvider(sysUserService, bCryptPasswordEncoder()), new MyInMemoryAuthenticationProvider(bCryptPasswordEncoder())));
     }
 }
