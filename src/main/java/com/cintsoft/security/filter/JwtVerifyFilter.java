@@ -35,12 +35,12 @@ public class JwtVerifyFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull FilterChain filterChain) throws ServletException, IOException {
-        final String header = request.getHeader("Authorzation");
+        final String header = request.getHeader("Authorization");
         if (header != null && header.startsWith("Bearer")) {
             try {
                 //从token转用户
                 final SysUser sysUser = jwtTokenUtil.getPayloadFromToken(header.split(" ")[1], SysUser.class);
-                SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(sysUser.getUsername(), null, sysUser.getAuthorities()));
+                SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(sysUser, null, sysUser.getAuthorities()));
             } catch (ExpiredJwtException e) {
                 //token过期
                 response.setCharacterEncoding("UTF-8");

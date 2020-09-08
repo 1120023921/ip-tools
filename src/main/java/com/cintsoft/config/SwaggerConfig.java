@@ -60,6 +60,6 @@ public class SwaggerConfig {
         final AuthorizationScope authorizationScope = new AuthorizationScope("global", "accessEverything");
         final AuthorizationScope[] authorizationScopes = new AuthorizationScope[1];
         authorizationScopes[0] = authorizationScope;
-        return singletonList(new SecurityReference("Authorzation", authorizationScopes));
+        return singletonList(new SecurityReference("Authorization", authorizationScopes));
     }
 }
