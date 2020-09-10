@@ -39,7 +39,7 @@ public class SysRoleMenuServiceImpl extends ServiceImpl<SysRoleMenuMapper, SysRo
         final List<SysRoleMenu> sysRoleMenuList = list(Wrappers.<SysRoleMenu>lambdaQuery().eq(SysRoleMenu::getRoleId, userRoleResourceVo.getRoleId()));
         //处理删除的
         final List<String> deleteIdList = sysRoleMenuList.stream()
-                .filter(sysRoleMenu -> !userRoleResourceVo.getResourceIdList().contains(sysRoleMenu.getMenuId()))
+                .filter(sysRoleMenu -> !userRoleResourceVo.getMenuIdList().contains(sysRoleMenu.getMenuId()))
                 .map(SysRoleMenu::getId)
                 .collect(Collectors.toList());
         if (!CollectionUtils.isEmpty(deleteIdList)) {
@@ -47,7 +47,7 @@ public class SysRoleMenuServiceImpl extends ServiceImpl<SysRoleMenuMapper, SysRo
         }
         //处理新增的
         final List<String> menuIdList = sysRoleMenuList.stream().map(SysRoleMenu::getMenuId).collect(Collectors.toList());
-        final List<String> menuIdListNew = userRoleResourceVo.getResourceIdList().stream()
+        final List<String> menuIdListNew = userRoleResourceVo.getMenuIdList().stream()
                 .filter(id -> !menuIdList.contains(id))
                 .collect(Collectors.toList());
         final List<SysRoleMenu> sysRoleMenuListNew = new ArrayList<>();
