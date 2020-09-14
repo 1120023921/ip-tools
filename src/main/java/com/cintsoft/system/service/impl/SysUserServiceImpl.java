@@ -82,7 +82,11 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     @Override
     public Boolean update(SysUser sysUser) {
         if (!StringUtils.isEmpty(sysUser.getPassword())) {
-            sysUser.setPassword(passwordEncoder.encode(sysUser.getPassword()));
+            final SysUser sysUserOld = getById(sysUser.getId());
+            //如果密码与原先不一致则代表密码更新
+            if (!passwordEncoder.matches(sysUser.getPassword(), sysUserOld.getPassword())) {
+                sysUser.setPassword(passwordEncoder.encode(sysUser.getPassword()));
+            }
         }
         return updateById(sysUser);
     }

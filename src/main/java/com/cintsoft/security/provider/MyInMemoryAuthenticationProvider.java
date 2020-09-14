@@ -33,6 +33,10 @@ public class MyInMemoryAuthenticationProvider implements AuthenticationProvider 
         innerAdmin = new SysUser();
         innerAdmin.setUsername("user");
         innerAdmin.setPassword("{bcrypt}$2a$10$cJ9dXBXdHl7DuMQt.pcyAulUiiUqoaNJKmhAFyunybuht4uWlINBG");
+        innerAdmin.setIsAccountNonExpired(true);
+        innerAdmin.setIsAccountNonLocked(true);
+        innerAdmin.setIsCredentialsNonExpired(true);
+        innerAdmin.setIsEnabled(true);
         innerAdmin.setSysResourceList(Collections.singletonList(sysResource));
     }
 

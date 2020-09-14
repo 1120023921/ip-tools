@@ -5,6 +5,7 @@ import com.cintsoft.common.enums.ErrorCodeInfo;
 import com.cintsoft.common.utils.jwt.JwtTokenUtil;
 import com.cintsoft.common.vo.ResultBean;
 import com.cintsoft.system.model.SysUser;
+import org.springframework.beans.BeanUtils;
 import org.springframework.security.authentication.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -49,9 +50,10 @@ public class JwtLoginFilter extends AbstractAuthenticationProcessingFilter {
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException {
         final SysUser sysUser = (SysUser) authResult.getPrincipal();
         final SysUser payload = new SysUser();
-        payload.setId(sysUser.getId());
-        payload.setName(sysUser.getName());
-        payload.setSysResourceList(sysUser.getSysResourceList());
+        BeanUtils.copyProperties(sysUser, payload);
+        payload.setPassword(null);
+        payload.setMail(null);
+        payload.setPhone(null);
         final String token = jwtTokenUtil.generateToken(payload);
         final Map<String, Object> result = new HashMap<>();
         result.put("token", token);
