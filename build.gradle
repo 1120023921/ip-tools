@@ -31,6 +31,12 @@ dependencies {
     }
 }
 
+processResources {
+    from('src/main/java') {
+        include '**/*'
+    }
+}
+
 test {
     useJUnitPlatform()
 }
