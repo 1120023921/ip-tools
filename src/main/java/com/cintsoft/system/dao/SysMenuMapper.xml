@@ -12,6 +12,7 @@
         <result column="component" property="component" />
         <result column="url" property="url" />
         <result column="parent_id" property="parentId" />
+        <result column="dis_name" property="disName" />
         <result column="weight" property="weight" />
         <result column="create_time" property="createTime" />
         <result column="update_time" property="updateTime" />
@@ -24,7 +25,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, type, name, path, icon, component, url, parent_id, weight, create_time, update_time, create_by, update_by, version, deleted, extra
+        id, type, name, path, icon, component, url, parent_id, dis_name, weight, create_time, update_time, create_by, update_by, version, deleted, extra
     </sql>
 
 </mapper>

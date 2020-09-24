@@ -32,6 +32,9 @@ public class SysMenuValidator extends BaseValidator {
         if (StringUtils.isEmpty(sysMenu.getParentId())) {
             throw new ParameterValidateException(BusinessCode.PARENT_ID_EMPTY_ERROR);
         }
+        if (StringUtils.isEmpty(sysMenu.getDisName())) {
+            throw new ParameterValidateException(BusinessCode.DIS_NAME_EMPTY_ERROR);
+        }
         if (!"0".equals(sysMenu.getParentId()) && sysMenuService.getById(sysMenu.getParentId()) == null) {
             throw new ParameterValidateException(BusinessCode.PARENT_ID_NOT_EXIST_ERROR);
         }
