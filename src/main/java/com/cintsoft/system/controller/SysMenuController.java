@@ -91,5 +91,18 @@ public class SysMenuController {
     public ResultBean<List<SysMenuView>> treeSysMenu() {
         return ResultBean.restResult(sysMenuService.treeSysMenu(), ErrorCodeInfo.OK);
     }
+
+    /**
+     * @description 查询用户菜单树形结构
+     * @author 胡昊
+     * @email huhao9277@gmail.com
+     * @date 2020/9/14 11:09
+     */
+    @ApiOperation("查询用户菜单树形结构")
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/treeUserSysMenu")
+    public ResultBean<List<SysMenuView>> treeUserSysMenu() {
+        return ResultBean.restResult(sysMenuService.treeUserSysMenu(), ErrorCodeInfo.OK);
+    }
 }
 

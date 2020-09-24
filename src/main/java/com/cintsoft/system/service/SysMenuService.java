@@ -32,4 +32,12 @@ public interface SysMenuService extends IService<SysMenu> {
      * @date 2020/7/28 10:41
      */
     List<SysMenuView> treeSysMenu();
+
+    /**
+     * @description 查询用户菜单树形结构
+     * @author 胡昊
+     * @email huhao9277@gmail.com
+     * @date 2020/9/14 11:09
+     */
+    List<SysMenuView> treeUserSysMenu();
 }
