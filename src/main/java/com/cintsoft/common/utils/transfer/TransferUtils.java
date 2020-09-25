@@ -1,9 +1,11 @@
 package com.cintsoft.common.utils.transfer;
 
+import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cintsoft.common.utils.pagination.PaginationUtils;
 import com.cintsoft.common.vo.ResultBean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -52,5 +54,12 @@ public class TransferUtils {
 
     public static <T> T getFeginResultData(ResultBean<T> resultBean) {
         return resultBean.getData();
+    }
+
+    public static List<OrderItem> transferOrderItem(String[] ascs, String[] descs) {
+        final List<OrderItem> orderItemList = new ArrayList<>();
+        orderItemList.addAll(OrderItem.ascs(ascs));
+        orderItemList.addAll(OrderItem.descs(descs));
+        return orderItemList;
     }
 }
