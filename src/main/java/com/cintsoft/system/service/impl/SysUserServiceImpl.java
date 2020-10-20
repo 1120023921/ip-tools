@@ -86,6 +86,8 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
             //如果密码与原先不一致则代表密码更新
             if (!passwordEncoder.matches(sysUser.getPassword(), sysUserOld.getPassword())) {
                 sysUser.setPassword(passwordEncoder.encode(sysUser.getPassword()));
+            } else {
+                sysUser.setPassword(null);
             }
         }
         return updateById(sysUser);
