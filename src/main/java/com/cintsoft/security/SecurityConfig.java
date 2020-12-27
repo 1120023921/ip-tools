@@ -8,6 +8,9 @@ import com.cintsoft.security.handler.MyAuthenticationFailureHandler;
 import com.cintsoft.security.provider.MyDaoAuthenticationProvider;
 import com.cintsoft.security.provider.MyInMemoryAuthenticationProvider;
 import com.cintsoft.system.model.SysUser;
+import com.cintsoft.system.service.SysResourceService;
+import com.cintsoft.system.service.SysRoleResourceService;
+import com.cintsoft.system.service.SysRoleUserService;
 import com.cintsoft.system.service.SysUserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -41,6 +44,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Resource
     private SysUserService sysUserService;
     @Resource
+    private SysResourceService sysResourceService;
+    @Resource
+    private SysRoleUserService sysRoleUserService;
+    @Resource
+    private SysRoleResourceService sysRoleResourceService;
+    @Resource
     private JwtTokenUtil<SysUser> jwtTokenUtil;
 
     @Bean
@@ -61,7 +70,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .addFilterBefore(new JwtLoginFilter(authenticationManager(), jwtTokenUtil), UsernamePasswordAuthenticationFilter.class)
-                .addFilterBefore(new JwtVerifyFilter(jwtTokenUtil), BasicAuthenticationFilter.class)
+                .addFilterBefore(new JwtVerifyFilter(jwtTokenUtil, sysRoleUserService, sysRoleResourceService, sysResourceService), BasicAuthenticationFilter.class)
                 .exceptionHandling()
                 .authenticationEntryPoint(new MyAuthenticationFailureHandler())
                 .accessDeniedHandler(new MyAccessDeniedHandler())
