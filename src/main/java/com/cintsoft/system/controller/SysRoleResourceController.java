@@ -62,7 +62,7 @@ public class SysRoleResourceController {
     @GetMapping("/listRoleResource")
     public ResultBean<List<SysResource>> listRoleResource(String roleId) {
         //参数校验
-        if (StringUtils.isEmpty(roleId)) {
+        if (!StringUtils.hasText(roleId)) {
             throw new ParameterValidateException(BusinessCode.ROLE_ID_EMPTY_ERROR);
         }
         return ResultBean.restResult(sysRoleResourceService.listRoleResource(roleId), ErrorCodeInfo.OK);

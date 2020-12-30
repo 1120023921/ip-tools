@@ -17,7 +17,7 @@ public class SysRoleUserValidator extends BaseValidator {
 
 
     public static void saveUserRoleValidate(UserRoleResourceVo userRoleResourceVo) {
-        if (StringUtils.isEmpty(userRoleResourceVo.getUserId())) {
+        if (!StringUtils.hasText(userRoleResourceVo.getUserId())) {
             throw new ParameterValidateException(BusinessCode.USER_ID_EMPTY_ERROR);
         }
         if (userRoleResourceVo.getRoleIdList() == null) {
@@ -26,7 +26,7 @@ public class SysRoleUserValidator extends BaseValidator {
     }
 
     public static void saveRoleUserValidate(UserRoleResourceVo userRoleResourceVo) {
-        if (StringUtils.isEmpty(userRoleResourceVo.getRoleId())) {
+        if (!StringUtils.hasText(userRoleResourceVo.getRoleId())) {
             throw new ParameterValidateException(BusinessCode.ROLE_ID_EMPTY_ERROR);
         }
         if (userRoleResourceVo.getUserIdList() == null) {

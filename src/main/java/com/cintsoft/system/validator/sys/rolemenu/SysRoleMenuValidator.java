@@ -17,7 +17,7 @@ public class SysRoleMenuValidator extends BaseValidator {
 
 
     public static void saveRoleMenu(UserRoleResourceVo userRoleResourceVo) {
-        if (StringUtils.isEmpty(userRoleResourceVo.getRoleId())) {
+        if (!StringUtils.hasText(userRoleResourceVo.getRoleId())) {
             throw new ParameterValidateException(BusinessCode.ROLE_ID_EMPTY_ERROR);
         }
         if (userRoleResourceVo.getMenuIdList() == null) {

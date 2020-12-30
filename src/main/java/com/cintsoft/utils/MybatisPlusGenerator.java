@@ -29,7 +29,7 @@ public class MybatisPlusGenerator {
         System.out.println("请输入" + tip + "：");
         if (scanner.hasNext()) {
             String ipt = scanner.next();
-            if (!StringUtils.isEmpty(ipt)) {
+            if (StringUtils.hasText(ipt)) {
                 return ipt;
             }
         }

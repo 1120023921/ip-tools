@@ -62,7 +62,7 @@ public class SysRoleUserController {
     @PreAuthorize("@cintSecurity.hasPermission('sysRoleUser:listUserRole')")
     @GetMapping("/listUserRole")
     public ResultBean<List<SysRole>> listUserRole(String userId) {
-        if (StringUtils.isEmpty(userId)) {
+        if (!StringUtils.hasText(userId)) {
             throw new ParameterValidateException(BusinessCode.USER_ID_EMPTY_ERROR);
         }
         return ResultBean.restResult(sysRoleUserService.listUserRole(userId), ErrorCodeInfo.OK);
@@ -95,7 +95,7 @@ public class SysRoleUserController {
     @PreAuthorize("@cintSecurity.hasPermission('sysRoleUser:listRoleUser')")
     @GetMapping("/listRoleUser")
     public ResultBean<List<SysUser>> listRoleUser(String roleId) {
-        if (StringUtils.isEmpty(roleId)) {
+        if (!StringUtils.hasText(roleId)) {
             throw new ParameterValidateException(BusinessCode.ROLE_ID_EMPTY_ERROR);
         }
         return ResultBean.restResult(sysRoleUserService.listRoleUser(roleId), ErrorCodeInfo.OK);

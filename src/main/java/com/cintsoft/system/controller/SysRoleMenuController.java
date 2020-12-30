@@ -62,7 +62,7 @@ public class SysRoleMenuController {
     @GetMapping("/listRoleMenu")
     public ResultBean<List<SysMenu>> listRoleMenu(String roleId) {
         //参数校验
-        if (StringUtils.isEmpty(roleId)) {
+        if (!StringUtils.hasText(roleId)) {
             throw new ParameterValidateException(BusinessCode.ROLE_ID_EMPTY_ERROR);
         }
         return ResultBean.restResult(sysRoleMenuService.listRoleMenu(roleId), ErrorCodeInfo.OK);

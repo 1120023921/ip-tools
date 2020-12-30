@@ -17,22 +17,22 @@ import org.springframework.util.StringUtils;
 public class SysMenuValidator extends BaseValidator {
 
     public static void insert(SysMenu sysMenu, SysMenuService sysMenuService) {
-        if (StringUtils.isEmpty(sysMenu.getName())) {
+        if (!StringUtils.hasText(sysMenu.getName())) {
             throw new ParameterValidateException(BusinessCode.MENU_NAME_EMPTY_ERROR);
         }
         if (sysMenu.getType() == null) {
             throw new ParameterValidateException(BusinessCode.MENU_TYPE_EMPTY_ERROR);
         }
-        if (StringUtils.isEmpty(sysMenu.getPath())) {
+        if (!StringUtils.hasText(sysMenu.getPath())) {
             throw new ParameterValidateException(BusinessCode.MENU_PATH_EMPTY_ERROR);
         }
-        if (StringUtils.isEmpty(sysMenu.getIcon())) {
+        if (!StringUtils.hasText(sysMenu.getIcon())) {
             throw new ParameterValidateException(BusinessCode.MENU_ICON_EMPTY_ERROR);
         }
-        if (StringUtils.isEmpty(sysMenu.getParentId())) {
+        if (!StringUtils.hasText(sysMenu.getParentId())) {
             throw new ParameterValidateException(BusinessCode.PARENT_ID_EMPTY_ERROR);
         }
-        if (StringUtils.isEmpty(sysMenu.getDisName())) {
+        if (!StringUtils.hasText(sysMenu.getDisName())) {
             throw new ParameterValidateException(BusinessCode.DIS_NAME_EMPTY_ERROR);
         }
         if (!"0".equals(sysMenu.getParentId()) && sysMenuService.getById(sysMenu.getParentId()) == null) {
@@ -41,7 +41,7 @@ public class SysMenuValidator extends BaseValidator {
     }
 
     public static void updateValidate(SysMenu sysMenu, SysMenuService sysMenuService) {
-        if (StringUtils.isEmpty(sysMenu.getId())) {
+        if (!StringUtils.hasText(sysMenu.getId())) {
             throw new ParameterValidateException(BusinessCode.MENU_ID_EMPTY_ERROR);
         }
         insert(sysMenu, sysMenuService);

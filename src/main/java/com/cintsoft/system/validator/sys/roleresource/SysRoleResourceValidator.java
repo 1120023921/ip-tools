@@ -15,7 +15,7 @@ import org.springframework.util.StringUtils;
  */
 public class SysRoleResourceValidator extends BaseValidator {
     public static void saveRoleResource(UserRoleResourceVo userRoleResourceVo) {
-        if (StringUtils.isEmpty(userRoleResourceVo.getRoleId())) {
+        if (!StringUtils.hasText(userRoleResourceVo.getRoleId())) {
             throw new ParameterValidateException(BusinessCode.ROLE_ID_EMPTY_ERROR);
         }
         if (userRoleResourceVo.getResourceIdList() == null) {

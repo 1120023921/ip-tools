@@ -16,19 +16,19 @@ import org.springframework.util.StringUtils;
 public class SysUserValidator extends BaseValidator {
 
     public static void insertValidate(SysUser sysUser) {
-        if (StringUtils.isEmpty(sysUser.getUsername())) {
+        if (!StringUtils.hasText(sysUser.getUsername())) {
             throw new ParameterValidateException(BusinessCode.USERNAME_EMPTY_ERROR);
         }
-        if (StringUtils.isEmpty(sysUser.getPassword())) {
+        if (!StringUtils.hasText(sysUser.getPassword())) {
             throw new ParameterValidateException(BusinessCode.PASSWORD_EMPTY_ERROR);
         }
     }
 
     public static void updateValidate(SysUser sysUser) {
-        if (StringUtils.isEmpty(sysUser.getId())) {
+        if (!StringUtils.hasText(sysUser.getId())) {
             throw new ParameterValidateException(BusinessCode.ID_EMPTY_ERROR);
         }
-        if (StringUtils.isEmpty(sysUser.getUsername())) {
+        if (!StringUtils.hasText(sysUser.getUsername())) {
             throw new ParameterValidateException(BusinessCode.USERNAME_EMPTY_ERROR);
         }
     }

@@ -17,19 +17,19 @@ public class SysResourceValidator extends BaseValidator {
 
 
     public static void insertValidate(SysResource sysResource) {
-        if (StringUtils.isEmpty(sysResource.getName())) {
+        if (!StringUtils.hasText(sysResource.getName())) {
             throw new ParameterValidateException(BusinessCode.RESOURCE_NAME_EMPTY_ERROR);
         }
-        if (StringUtils.isEmpty(sysResource.getResourceKey())) {
+        if (!StringUtils.hasText(sysResource.getResourceKey())) {
             throw new ParameterValidateException(BusinessCode.RESOURCE_KEY_EMPTY_ERROR);
         }
-        if (StringUtils.isEmpty(sysResource.getParentId())) {
+        if (!StringUtils.hasText(sysResource.getParentId())) {
             throw new ParameterValidateException(BusinessCode.PARENT_ID_EMPTY_ERROR);
         }
     }
 
     public static void updateValidate(SysResource sysResource) {
-        if (StringUtils.isEmpty(sysResource.getId())) {
+        if (!StringUtils.hasText(sysResource.getId())) {
             throw new ParameterValidateException(BusinessCode.ID_EMPTY_ERROR);
         }
         insertValidate(sysResource);
