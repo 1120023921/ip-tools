@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: ace-application-provider
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -19,3 +21,10 @@ jwt:
 web:
   upload: file:D:/
   mapping: /file/**
+# 注册中心配置
+eureka:
+  instance:
+    hostname: ace-application-provider
+  client:
+    service-url:
+      defaultZone: http://cint:cint@ace-eureka:8701/eureka/

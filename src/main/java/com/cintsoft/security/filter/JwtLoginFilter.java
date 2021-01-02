@@ -54,6 +54,7 @@ public class JwtLoginFilter extends AbstractAuthenticationProcessingFilter {
         payload.setPassword(null);
         payload.setMail(null);
         payload.setPhone(null);
+        payload.setSysResourceList(null);
         final String token = jwtTokenUtil.generateToken(payload);
         final Map<String, Object> result = new HashMap<>();
         result.put("token", token);
