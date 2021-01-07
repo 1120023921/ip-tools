@@ -1,0 +1,10 @@
+description('业务服务')
+
+compileJava.options.encoding = 'UTF-8'
+
+compileTestJava.options.encoding = 'UTF-8'
+
+dependencies {
+    compile project(':ace-business-provider-api')
+    compile 'junit:junit:4.12'
+}

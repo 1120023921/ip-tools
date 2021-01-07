@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cintsoft.ace.business.provider.system.dao.SysUserMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.cintsoft.ace.business.provider.system.model.SysUser">
+        <id column="id" property="id" />
+        <result column="username" property="username" />
+        <result column="name" property="name" />
+        <result column="password" property="password" />
+        <result column="gender" property="gender" />
+        <result column="phone" property="phone" />
+        <result column="mail" property="mail" />
+        <result column="header_url" property="headerUrl" />
+        <result column="user_source" property="userSource" />
+        <result column="is_account_non_expired" property="isAccountNonExpired" />
+        <result column="is_account_non_locked" property="isAccountNonLocked" />
+        <result column="is_credentials_non_expired" property="isCredentialsNonExpired" />
+        <result column="is_enabled" property="isEnabled" />
+        <result column="weight" property="weight" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="create_by" property="createBy" />
+        <result column="update_by" property="updateBy" />
+        <result column="version" property="version" />
+        <result column="deleted" property="deleted" />
+        <result column="extra" property="extra" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, username, name, password, gender, phone, mail, header_url, user_source, is_account_non_expired, is_account_non_locked, is_credentials_non_expired, is_enabled, weight, create_time, update_time, create_by, update_by, version, deleted, extra
+    </sql>
+
+</mapper>

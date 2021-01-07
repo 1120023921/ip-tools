@@ -1,1 +1,3 @@
 rootProject.name = 'application'
+include 'ace-business-provider-api'
+include 'ace-business-provider'

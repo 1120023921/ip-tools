@@ -1,0 +1,9 @@
+description('业务API')
+
+compileJava.options.encoding = 'UTF-8'
+
+compileTestJava.options.encoding = 'UTF-8'
+
+dependencies {
+
+}
