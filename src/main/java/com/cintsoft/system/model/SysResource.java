@@ -41,6 +41,21 @@ public class SysResource implements Serializable, GrantedAuthority {
     @ApiModelProperty(value = "父资源id")
     private String parentId;
 
+    @ApiModelProperty(value = "图标")
+    private String icon;
+
+    @ApiModelProperty(value = "路由缓冲 0-关闭 1-开启")
+    private Integer keepAlive;
+
+    @ApiModelProperty(value = "路径类型 1-菜单 2-按钮")
+    private Integer type;
+
+    @ApiModelProperty(value = "路径")
+    private String path;
+
+    @ApiModelProperty(value = "模块 1-移动端 2-PC端")
+    private String moudle;
+
     @ApiModelProperty(value = "权重")
     private Integer weight;
 

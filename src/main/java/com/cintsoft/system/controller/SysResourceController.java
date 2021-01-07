@@ -91,5 +91,18 @@ public class SysResourceController {
     public ResultBean<List<SysResourceView>> treeSysResource() {
         return ResultBean.restResult(sysResourceService.treeSysResource(), ErrorCodeInfo.OK);
     }
+
+    /**
+     * @description 用户获取菜单
+     * @author 胡昊
+     * @email huhao9277@gmail.com
+     * @date 2021/1/7 22:38
+     */
+    @ApiOperation("用户获取菜单")
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/userTreeSysResource")
+    public ResultBean<List<SysResourceView>> userTreeSysResource() {
+        return ResultBean.restResult(sysResourceService.userTreeSysResource(), ErrorCodeInfo.OK);
+    }
 }
 

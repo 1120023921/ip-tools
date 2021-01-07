@@ -32,4 +32,12 @@ public interface SysResourceService extends IService<SysResource> {
      * @date 2020/7/25 21:28:02
      */
     List<SysResourceView> treeSysResource();
+
+    /**
+     * @description 用户获取菜单
+     * @author 胡昊
+     * @email huhao9277@gmail.com
+     * @date 2021/1/7 22:38
+     */
+    List<SysResourceView> userTreeSysResource();
 }

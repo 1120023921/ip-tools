@@ -4,17 +4,22 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.cintsoft.system.model.SysResource;
 import com.cintsoft.system.dao.SysResourceMapper;
 import com.cintsoft.system.model.SysRoleResource;
+import com.cintsoft.system.model.SysRoleUser;
+import com.cintsoft.system.model.SysUser;
 import com.cintsoft.system.service.SysResourceService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.cintsoft.system.service.SysRoleResourceService;
+import com.cintsoft.system.service.SysRoleUserService;
 import com.cintsoft.system.vo.SysResourceView;
 import org.springframework.beans.BeanUtils;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -33,6 +38,8 @@ public class SysResourceServiceImpl extends ServiceImpl<SysResourceMapper, SysRe
 
     @Resource
     private SysRoleResourceService sysRoleResourceService;
+    @Resource
+    private SysRoleUserService sysRoleUserService;
 
     @Override
     public Boolean deleteBatch(List<String> idList) {
@@ -50,8 +57,30 @@ public class SysResourceServiceImpl extends ServiceImpl<SysResourceMapper, SysRe
 
     @Override
     public List<SysResourceView> treeSysResource() {
-        final List<SysResource> allSysResourceList = list();
-        final List<SysResourceView> sysResourceViewList = allSysResourceList
+        return buildResourceTree(list());
+    }
+
+    @Override
+    public List<SysResourceView> userTreeSysResource() {
+        final SysUser sysUser = (SysUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        final List<String> roleIdList = sysRoleUserService.list(Wrappers.<SysRoleUser>lambdaQuery().in(SysRoleUser::getUserId, sysUser.getId()))
+                .stream()
+                .map(SysRoleUser::getRoleId)
+                .collect(Collectors.toList());
+        if (!CollectionUtils.isEmpty(roleIdList)) {
+            final List<String> resourceIdList = sysRoleResourceService.list(Wrappers.<SysRoleResource>lambdaQuery().in(SysRoleResource::getRoleId, roleIdList))
+                    .stream()
+                    .map(SysRoleResource::getResourceId)
+                    .collect(Collectors.toList());
+            if (!CollectionUtils.isEmpty(resourceIdList)) {
+                return buildResourceTree(listByIds(resourceIdList));
+            }
+        }
+        return Collections.emptyList();
+    }
+
+    private List<SysResourceView> buildResourceTree(List<SysResource> sysResourceList) {
+        final List<SysResourceView> sysResourceViewList = sysResourceList
                 .stream()
                 .filter(sysResource -> sysResource.getParentId().equals("0"))
                 .sorted(Comparator.comparingLong(SysResource::getCreateTime).reversed())
@@ -62,7 +91,7 @@ public class SysResourceServiceImpl extends ServiceImpl<SysResourceMapper, SysRe
                 })
                 .collect(Collectors.toList());
         if (!CollectionUtils.isEmpty(sysResourceViewList)) {
-            treeChildSysResource(sysResourceViewList, allSysResourceList);
+            treeChildSysResource(sysResourceViewList, sysResourceList);
         }
         return sysResourceViewList;
     }
