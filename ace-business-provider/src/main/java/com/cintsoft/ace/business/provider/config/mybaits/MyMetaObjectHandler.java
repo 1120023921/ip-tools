@@ -1,4 +1,4 @@
-package com.cintsoft.ace.business.provider.config;
+package com.cintsoft.ace.business.provider.config.mybaits;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import com.cintsoft.ace.business.provider.system.model.SysUser;

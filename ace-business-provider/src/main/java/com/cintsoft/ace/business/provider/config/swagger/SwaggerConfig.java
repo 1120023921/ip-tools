@@ -1,4 +1,4 @@
-package com.cintsoft.ace.business.provider.config;
+package com.cintsoft.ace.business.provider.config.swagger;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,7 +1,7 @@
 package com.cintsoft.ace.business.provider;
 
 import com.cintsoft.ace.business.provider.common.utils.jwt.JwtTokenUtil;
-import com.cintsoft.ace.business.provider.config.bean.WebConfig;
+import com.cintsoft.ace.business.provider.config.web.WebConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.client.SpringCloudApplication;

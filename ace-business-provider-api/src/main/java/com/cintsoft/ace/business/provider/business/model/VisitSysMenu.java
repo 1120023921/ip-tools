@@ -87,7 +87,7 @@ public class VisitSysMenu implements Serializable {
     private String extra;
 
     @ApiModelProperty(value = "租户id")
-    private Integer tenantId;
+    private String tenantId;
 
 
 }

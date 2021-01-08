@@ -1,7 +1,8 @@
-package com.cintsoft.ace.business.provider.config.bean;
+package com.cintsoft.ace.business.provider.config.web;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 
 /**
  * @author 胡昊
@@ -11,6 +12,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * Mail: huhao9277@gmail.com
  */
 @Data
+@RefreshScope
 @ConfigurationProperties(prefix = "web")
 public class WebConfig {
 

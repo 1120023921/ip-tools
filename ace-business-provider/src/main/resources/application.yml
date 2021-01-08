@@ -28,3 +28,9 @@ eureka:
   client:
     service-url:
       defaultZone: http://cint:cint@ace-eureka:8701/eureka/
+ace:
+  tenant:
+    enable: true
+    column: tenant_id
+    tables:
+      -

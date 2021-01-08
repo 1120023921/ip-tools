@@ -1,6 +1,5 @@
-package com.cintsoft.ace.business.provider.config;
+package com.cintsoft.ace.business.provider.config.web;
 
-import com.cintsoft.ace.business.provider.config.bean.WebConfig;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.lang.NonNull;
 import org.springframework.util.StringUtils;
