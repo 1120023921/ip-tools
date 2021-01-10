@@ -6,8 +6,6 @@ import net.sf.jsqlparser.expression.NullValue;
 import net.sf.jsqlparser.expression.StringValue;
 import org.springframework.util.StringUtils;
 
-import javax.annotation.Resource;
-
 /**
  * @author 胡昊
  * Description:
@@ -17,8 +15,11 @@ import javax.annotation.Resource;
  */
 public class AceTenantLineHandler implements TenantLineHandler {
 
-    @Resource
-    private AceTenantConfigProperties aceTenantConfigProperties;
+    private final AceTenantConfigProperties aceTenantConfigProperties;
+
+    public AceTenantLineHandler(AceTenantConfigProperties aceTenantConfigProperties) {
+        this.aceTenantConfigProperties = aceTenantConfigProperties;
+    }
 
     @Override
     public Expression getTenantId() {

@@ -15,11 +15,12 @@
         <result column="version" property="version" />
         <result column="deleted" property="deleted" />
         <result column="extra" property="extra" />
+        <result column="tenant_id" property="tenantId" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, role_id, resource_id, weight, create_time, update_time, create_by, update_by, version, deleted, extra
+        id, role_id, resource_id, weight, create_time, update_time, create_by, update_by, version, deleted, extra, tenant_id
     </sql>
 
 </mapper>

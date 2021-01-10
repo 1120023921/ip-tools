@@ -6,11 +6,13 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 
 import java.io.Serializable;
 import java.util.Date;
 
 @Data
+@RefreshScope
 @ConfigurationProperties(prefix = "jwt")
 public class JwtTokenUtil<T> implements Serializable {
 

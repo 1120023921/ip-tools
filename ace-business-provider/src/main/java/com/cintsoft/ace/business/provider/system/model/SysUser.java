@@ -98,6 +98,9 @@ public class SysUser implements Serializable, UserDetails {
     @ApiModelProperty(value = "额外信息")
     private String extra;
 
+    @ApiModelProperty(value = "租户id")
+    private String tenantId;
+
     @TableField(exist = false)
     private List<SysResource> sysResourceList = Collections.emptyList();
 

@@ -62,5 +62,6 @@ public class SysRoleResource implements Serializable {
     @ApiModelProperty(value = "额外信息")
     private String extra;
 
-
+    @ApiModelProperty(value = "租户id")
+    private String tenantId;
 }

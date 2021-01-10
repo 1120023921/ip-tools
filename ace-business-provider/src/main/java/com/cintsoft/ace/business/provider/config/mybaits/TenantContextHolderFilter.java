@@ -1,11 +1,14 @@
 package com.cintsoft.ace.business.provider.config.mybaits;
 
 import cn.hutool.core.util.StrUtil;
+import com.cintsoft.ace.business.provider.system.model.SysUser;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 import org.springframework.web.filter.GenericFilterBean;
 
 import javax.servlet.FilterChain;
@@ -30,15 +33,20 @@ public class TenantContextHolderFilter extends GenericFilterBean {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
 
-        String tenantId = request.getHeader("TENANT_ID");
-        log.debug("获取header中的租户ID为:{}", tenantId);
+        final SysUser sysUser = (SysUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (sysUser != null && !StringUtils.isEmpty(sysUser.getTenantId())) {
+            log.debug("当前登录用户租户id=" + sysUser.getTenantId());
+            TenantContextHolder.setTenantId(sysUser.getTenantId());
+        } else {
+            final String tenantId = request.getHeader("TENANT_ID");
+            log.debug("当前header中的租户id=" + tenantId);
 
-        if (StrUtil.isNotBlank(tenantId)) {
-            TenantContextHolder.setTenantId(tenantId);
-        } else{
-            TenantContextHolder.setTenantId("0");
+            if (StrUtil.isNotBlank(tenantId)) {
+                TenantContextHolder.setTenantId(tenantId);
+            } else {
+                TenantContextHolder.setTenantId("0");
+            }
         }
-
         filterChain.doFilter(request, response);
         TenantContextHolder.clear();
     }

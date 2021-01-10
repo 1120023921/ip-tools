@@ -30,6 +30,7 @@ allprojects{
         implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
         implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
         implementation 'org.springframework.cloud:spring-cloud-starter-netflix-hystrix'
+        implementation 'org.springframework.cloud:spring-cloud-starter-config'
         implementation 'com.baomidou:mybatis-plus-boot-starter:3.4.1'
         implementation 'com.baomidou:mybatis-plus-generator:3.4.1'
         implementation 'org.apache.velocity:velocity-engine-core:2.2'

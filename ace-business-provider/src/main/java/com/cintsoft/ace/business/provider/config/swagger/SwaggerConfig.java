@@ -1,5 +1,7 @@
 package com.cintsoft.ace.business.provider.config.swagger;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.PathSelectors;
@@ -25,18 +27,20 @@ import static java.util.Collections.singletonList;
 public class SwaggerConfig {
 
     @Bean
-    public Docket api() {
+    public Docket api(@Autowired ApiInfo apiInfo, @Autowired ApiKey apiKey, @Autowired SecurityContext securityContext) {
         return new Docket(DocumentationType.OAS_30)
                 .select()
                 .apis(RequestHandlerSelectors.any())
                 .paths(PathSelectors.any())
                 .build()
-                .apiInfo(apiInfo())
-                .securitySchemes(singletonList(apiKey()))
-                .securityContexts(singletonList(securityContext()));
+                .apiInfo(apiInfo)
+                .securitySchemes(singletonList(apiKey))
+                .securityContexts(singletonList(securityContext));
     }
 
-    private ApiInfo apiInfo() {
+    @Bean
+    @ConditionalOnMissingBean(ApiInfo.class)
+    public ApiInfo apiInfo() {
         return new ApiInfo(
                 "华智单体项目接口文档",
                 "华智单体应用框架",
@@ -46,11 +50,15 @@ public class SwaggerConfig {
                 "Apache", "http://www.apache.org/", Collections.emptyList());
     }
 
-    private ApiKey apiKey() {
+    @Bean
+    @ConditionalOnMissingBean(ApiKey.class)
+    public ApiKey apiKey() {
         return new ApiKey("Authorization", "Authorization", "header");
     }
 
-    private SecurityContext securityContext() {
+    @Bean
+    @ConditionalOnMissingBean(SecurityContext.class)
+    public SecurityContext securityContext() {
         return SecurityContext.builder()
                 .securityReferences(defaultAuth())
                 .build();

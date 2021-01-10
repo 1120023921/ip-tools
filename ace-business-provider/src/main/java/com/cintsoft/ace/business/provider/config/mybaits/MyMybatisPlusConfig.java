@@ -1,6 +1,7 @@
 package com.cintsoft.ace.business.provider.config.mybaits;
 
 import com.baomidou.mybatisplus.annotation.DbType;
+import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.handler.TenantLineHandler;
 import com.baomidou.mybatisplus.extension.plugins.inner.OptimisticLockerInnerInterceptor;
@@ -25,17 +26,38 @@ import org.springframework.context.annotation.Configuration;
 public class MyMybatisPlusConfig {
 
     /**
-     * 创建租户维护处理器对象
-     *
-     * @return 处理后的租户维护处理器
+     * @param aceTenantConfigProperties 租户配置信息
+     * @description 租户默认配置
+     * @author 胡昊
+     * @email huhao9277@gmail.com
+     * @date 2021/1/10 11:42
      */
     @Bean
     @ConditionalOnBean(AceTenantConfigProperties.class)
     @ConditionalOnMissingBean
-    public TenantLineHandler tenantLineHandler() {
-        return new AceTenantLineHandler();
+    public TenantLineHandler tenantLineHandler(@Autowired AceTenantConfigProperties aceTenantConfigProperties) {
+        return new AceTenantLineHandler(aceTenantConfigProperties);
     }
 
+    /**
+     * @description 自动填充默认配置
+     * @author 胡昊
+     * @email huhao9277@gmail.com
+     * @date 2021/1/10 11:41
+     */
+    @Bean
+    @ConditionalOnMissingBean(MetaObjectHandler.class)
+    public AceMetaObjectHandler aceMetaObjectHandler() {
+        return new AceMetaObjectHandler();
+    }
+
+    /**
+     * @param tenantLineHandler 租户处理器
+     * @description Mybaits插件配置
+     * @author 胡昊
+     * @email huhao9277@gmail.com
+     * @date 2021/1/10 11:42
+     */
     @Bean
     public MybatisPlusInterceptor mybatisPlusInterceptor(@Autowired(required = false) TenantLineHandler tenantLineHandler) {
         MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();

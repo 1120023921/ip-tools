@@ -5,7 +5,6 @@ import com.cintsoft.ace.business.provider.system.model.SysUser;
 import org.apache.ibatis.reflection.MetaObject;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Component;
 
 /**
  * @author 胡昊
@@ -14,8 +13,8 @@ import org.springframework.stereotype.Component;
  * Time: 11:02
  * Mail: huhao9277@gmail.com
  */
-@Component
-public class MyMetaObjectHandler implements MetaObjectHandler {
+public class AceMetaObjectHandler implements MetaObjectHandler {
+
     @Override
     public void insertFill(MetaObject metaObject) {
         metaObject.setValue("createTime", null);

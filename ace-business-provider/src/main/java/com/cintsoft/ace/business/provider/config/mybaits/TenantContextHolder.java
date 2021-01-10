@@ -7,7 +7,6 @@ public class TenantContextHolder {
 
     private final ThreadLocal<String> THREAD_LOCAL_TENANT = new ThreadLocal<>();
 
-
     public void setTenantId(String tenantId) {
         THREAD_LOCAL_TENANT.set(tenantId);
     }
