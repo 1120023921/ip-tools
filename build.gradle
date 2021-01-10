@@ -16,6 +16,7 @@ allprojects{
 
     repositories {
         maven { url 'https://maven.aliyun.com/repository/public/' }
+        maven { url "http://nexus.cintsoft.com/repository/cintsoft-public/" }
         mavenCentral()
     }
 

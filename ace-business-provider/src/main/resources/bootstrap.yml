@@ -44,4 +44,4 @@ ace:
     enable: true
     column: tenant_id
     tables:
-      -
+      - visit_sys_menu

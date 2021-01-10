@@ -6,5 +6,6 @@ compileTestJava.options.encoding = 'UTF-8'
 
 dependencies {
     compile project(':ace-business-provider-api')
+    implementation 'com.cintsoft:ace-mybatis-plus-config-starter:2.4'
     compile 'junit:junit:4.12'
 }

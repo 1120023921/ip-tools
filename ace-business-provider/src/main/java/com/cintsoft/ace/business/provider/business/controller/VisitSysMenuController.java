@@ -28,12 +28,11 @@ public class VisitSysMenuController {
 
     @Resource
     private VisitSysMenuService visitSysMenuService;
-    @Value("${ace.ppp}")
-    private String ppp;
 
     @GetMapping("/test")
     public Object test(){
-        return ppp;
+        List<VisitSysMenu> list = visitSysMenuService.list();
+        return list;
     }
 }
 
