@@ -11,6 +11,10 @@ spring:
     multipart:
       max-file-size: 500MB
       max-request-size: 500MB
+  redis:
+    host: mariadb.cintsoft.com
+    password: cint
+    database: 2
   cloud:
     config:
       label: master
@@ -39,9 +43,11 @@ eureka:
   client:
     service-url:
       defaultZone: http://cint:cint@ace-eureka:8701/eureka/
-ace:
-  tenant:
-    enable: true
-    column: tenant_id
-    tables:
-      - visit_sys_menu
+#ace:
+#  tenant:
+#    enable: true
+#    column: tenant_id
+#    tables:
+#      - visit_sys_menu
+#  security:
+#    token-expire: 7200

@@ -6,6 +6,11 @@ compileTestJava.options.encoding = 'UTF-8'
 
 dependencies {
     compile project(':ace-business-provider-api')
+    implementation 'com.baomidou:mybatis-plus-boot-starter:3.4.1'
+    implementation 'com.baomidou:mybatis-plus-generator:3.4.1'
+    implementation 'org.springframework.cloud:spring-cloud-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
     implementation 'com.cintsoft:ace-mybatis-plus-config-starter:2.4'
+    implementation 'com.cintsoft:ace-spring-security-config-starter:2.1'
     compile 'junit:junit:4.12'
 }

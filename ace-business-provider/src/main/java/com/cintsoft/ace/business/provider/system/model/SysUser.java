@@ -1,12 +1,12 @@
 package com.cintsoft.ace.business.provider.system.model;
 
 import com.baomidou.mybatisplus.annotation.*;
+import com.cintsoft.spring.security.model.AceUser;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -22,9 +22,9 @@ import java.util.List;
  * @since 2020-07-23
  */
 @Data
-@EqualsAndHashCode(callSuper = false)
+@EqualsAndHashCode(callSuper = true)
 @ApiModel(value = "SysUser对象", description = "用户信息")
-public class SysUser implements Serializable, UserDetails {
+public class SysUser extends AceUser implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -102,30 +102,9 @@ public class SysUser implements Serializable, UserDetails {
     private String tenantId;
 
     @TableField(exist = false)
-    private List<SysResource> sysResourceList = Collections.emptyList();
+    private List<? extends GrantedAuthority> sysResourceList = Collections.emptyList();
 
-    @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return sysResourceList;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return isAccountNonExpired;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return isAccountNonLocked;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return isCredentialsNonExpired;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return isEnabled;
     }
 }

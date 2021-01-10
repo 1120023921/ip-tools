@@ -5,5 +5,5 @@ compileJava.options.encoding = 'UTF-8'
 compileTestJava.options.encoding = 'UTF-8'
 
 dependencies {
-
+    implementation 'com.baomidou:mybatis-plus-boot-starter:3.4.1'
 }
