@@ -1,9 +1,9 @@
 package com.cintsoft.ace.business.provider.security.provider;
 
-import com.cintsoft.ace.business.provider.system.model.SysUser;
 import org.springframework.security.authentication.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -28,24 +28,24 @@ public class MyDaoAuthenticationProvider implements AuthenticationProvider {
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         final String username = (String) authentication.getPrincipal();
         final String password = (String) authentication.getCredentials();
-        final SysUser sysUser = (SysUser) userDetailsService.loadUserByUsername(username);
-        if (sysUser != null) {
-            if (!sysUser.isAccountNonLocked()) {
+        final UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+        if (userDetails != null) {
+            if (!userDetails.isAccountNonLocked()) {
                 throw new LockedException("User account is locked");
             }
-            if (!sysUser.isEnabled()) {
+            if (!userDetails.isEnabled()) {
                 throw new DisabledException("User is disabled");
             }
-            if (!sysUser.isAccountNonExpired()) {
+            if (!userDetails.isAccountNonExpired()) {
                 throw new AccountExpiredException("User account has expired");
             }
-            if (!sysUser.isCredentialsNonExpired()) {
+            if (!userDetails.isCredentialsNonExpired()) {
                 throw new CredentialsExpiredException("User credentials has expired");
             }
-            if (!passwordEncoder.matches(password, sysUser.getPassword())) {
+            if (!passwordEncoder.matches(password, userDetails.getPassword())) {
                 throw new BadCredentialsException("Bad credentials");
             }
-            return new UsernamePasswordAuthenticationToken(sysUser, sysUser.getPassword(), sysUser.getAuthorities());
+            return new UsernamePasswordAuthenticationToken(userDetails, userDetails.getPassword(), userDetails.getAuthorities());
         }
         return null;
     }
