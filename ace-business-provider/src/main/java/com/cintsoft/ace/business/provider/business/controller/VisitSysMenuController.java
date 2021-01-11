@@ -3,7 +3,7 @@ package com.cintsoft.ace.business.provider.business.controller;
 
 import com.cintsoft.ace.business.provider.business.model.VisitSysMenu;
 import com.cintsoft.ace.business.provider.business.service.VisitSysMenuService;
-import org.springframework.beans.factory.annotation.Value;
+import com.cintsoft.spring.security.annotation.Inner;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -34,6 +34,7 @@ public class VisitSysMenuController {
         return list;
     }
 
+    @Inner
     @PostMapping("/test2")
     public Object test2(@RequestBody VisitSysMenu visitSysMenu) {
         return visitSysMenuService.updateById(visitSysMenu);
