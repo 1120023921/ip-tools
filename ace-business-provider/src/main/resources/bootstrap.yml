@@ -1,3 +1,7 @@
+server:
+  port: 8080
+  tomcat:
+    basedir: D:/tmp
 spring:
   application:
     name: ace-business-provider
@@ -30,9 +34,6 @@ mybatis-plus:
   configuration:
     map-underscore-to-camel-case: true
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-jwt:
-  secret: cintsoft
-  expiration: 7200
 web:
   upload: file:D:/
   mapping: /file/**
@@ -43,11 +44,11 @@ eureka:
   client:
     service-url:
       defaultZone: http://cint:cint@ace-eureka:8701/eureka/
-#ace:
-#  tenant:
-#    enable: true
-#    column: tenant_id
-#    tables:
-#      - visit_sys_menu
-#  security:
-#    token-expire: 7200
+ace:
+  tenant:
+    enable: true
+    column: tenant_id
+    tables:
+      - visit_sys_menu
+  security:
+    token-expire: 7200

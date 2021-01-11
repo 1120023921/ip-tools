@@ -33,7 +33,6 @@ allprojects {
         implementation 'org.springframework.cloud:spring-cloud-starter-config'
         implementation 'org.apache.velocity:velocity-engine-core:2.2'
         implementation 'io.springfox:springfox-boot-starter:3.0.0'
-        implementation 'io.jsonwebtoken:jjwt:0.9.1'
         implementation 'com.fasterxml.jackson.core:jackson-databind:2.11.1'
         implementation 'cn.hutool:hutool-all:5.3.9'
         runtimeOnly 'mysql:mysql-connector-java'
