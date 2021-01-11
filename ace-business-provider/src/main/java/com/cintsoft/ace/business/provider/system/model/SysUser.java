@@ -1,7 +1,6 @@
 package com.cintsoft.ace.business.provider.system.model;
 
 import com.baomidou.mybatisplus.annotation.*;
-import com.cintsoft.spring.security.model.AceUser;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -9,7 +8,6 @@ import lombok.EqualsAndHashCode;
 import org.springframework.security.core.GrantedAuthority;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -22,9 +20,9 @@ import java.util.List;
  * @since 2020-07-23
  */
 @Data
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = false)
 @ApiModel(value = "SysUser对象", description = "用户信息")
-public class SysUser extends AceUser implements Serializable {
+public class SysUser implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -100,11 +98,4 @@ public class SysUser extends AceUser implements Serializable {
 
     @ApiModelProperty(value = "租户id")
     private String tenantId;
-
-    @TableField(exist = false)
-    private List<? extends GrantedAuthority> sysResourceList = Collections.emptyList();
-
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return sysResourceList;
-    }
 }

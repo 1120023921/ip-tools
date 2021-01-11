@@ -4,14 +4,10 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.cintsoft.ace.business.provider.system.constant.SecurityConstant;
 import com.cintsoft.ace.business.provider.system.dao.SysUserMapper;
-import com.cintsoft.ace.business.provider.system.model.SysResource;
-import com.cintsoft.ace.business.provider.system.model.SysRoleResource;
-import com.cintsoft.ace.business.provider.system.model.SysRoleUser;
-import com.cintsoft.ace.business.provider.system.model.SysUser;
-import com.cintsoft.ace.business.provider.system.service.SysResourceService;
-import com.cintsoft.ace.business.provider.system.service.SysRoleResourceService;
-import com.cintsoft.ace.business.provider.system.service.SysRoleUserService;
-import com.cintsoft.ace.business.provider.system.service.SysUserService;
+import com.cintsoft.ace.business.provider.system.model.*;
+import com.cintsoft.ace.business.provider.system.service.*;
+import com.cintsoft.spring.security.model.AceUser;
+import org.springframework.beans.BeanUtils;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -42,25 +38,32 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     @Resource
     private SysResourceService sysResourceService;
     @Resource
+    private SysRoleService sysRoleService;
+    @Resource
     private PasswordEncoder passwordEncoder;
 
     @Override
-    public SysUser loadUserByUsername(String username) throws UsernameNotFoundException {
+    public AceUser loadUserByUsername(String username) throws UsernameNotFoundException {
         final SysUser sysUser = getOne(Wrappers.<SysUser>lambdaQuery().eq(SysUser::getUsername, username));
         if (sysUser == null) {
             return null;
         }
+        final AceUser aceUser = new AceUser();
+        BeanUtils.copyProperties(sysUser, aceUser);
         final List<SysRoleUser> sysRoleUserList = sysRoleUserService.list(Wrappers.<SysRoleUser>lambdaQuery().eq(SysRoleUser::getUserId, sysUser.getId()));
         if (!CollectionUtils.isEmpty(sysRoleUserList)) {
+            final List<SysRole> sysRoleList = sysRoleService.listByIds(sysRoleUserList.stream().map(SysRoleUser::getRoleId).collect(Collectors.toSet()));
+            aceUser.setRoleKeyList(sysRoleList.stream().map(SysRole::getRoleKey).collect(Collectors.toList()));
             final List<SysRoleResource> sysRoleResourceList = sysRoleResourceService.list(Wrappers.<SysRoleResource>lambdaQuery().in(SysRoleResource::getRoleId, sysRoleUserList.stream().map(SysRoleUser::getRoleId).collect(Collectors.toList())));
             if (!CollectionUtils.isEmpty(sysRoleResourceList)) {
                 final List<SysResource> sysResourceList = sysResourceService.listByIds(sysRoleResourceList.stream().map(SysRoleResource::getResourceId).collect(Collectors.toList()));
                 if (!CollectionUtils.isEmpty(sysResourceList)) {
-                    sysUser.setSysResourceList(sysResourceList);
+                    aceUser.setResourceKeyList(sysResourceList.stream().map(SysResource::getResourceKey).collect(Collectors.toList()));
+                    aceUser.setSysResourceList(sysResourceList);
                 }
             }
         }
-        return sysUser;
+        return aceUser;
     }
 
     @Override
