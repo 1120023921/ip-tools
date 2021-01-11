@@ -11,6 +11,6 @@ dependencies {
     implementation 'org.springframework.cloud:spring-cloud-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-data-redis'
     implementation 'com.cintsoft:ace-mybatis-plus-config-starter:2.4'
-    implementation 'com.cintsoft:ace-spring-security-config-starter:2.1'
+    implementation 'com.cintsoft:ace-spring-security-config-starter:2.2'
     compile 'junit:junit:4.12'
 }
