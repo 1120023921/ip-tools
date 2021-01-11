@@ -1,15 +1,15 @@
 package com.cintsoft.ace.business.provider.system.controller;
 
 
-import com.cintsoft.ace.business.provider.common.enums.ErrorCodeInfo;
-import com.cintsoft.ace.business.provider.common.exception.BusinessCode;
-import com.cintsoft.ace.business.provider.common.exception.ParameterValidateException;
-import com.cintsoft.ace.business.provider.common.vo.ResultBean;
+import com.cintsoft.ace.business.provider.system.constant.SysBusinessCode;
 import com.cintsoft.ace.business.provider.system.model.SysRole;
 import com.cintsoft.ace.business.provider.system.model.SysUser;
 import com.cintsoft.ace.business.provider.system.service.SysRoleUserService;
 import com.cintsoft.ace.business.provider.system.validator.sys.roleuser.SysRoleUserValidator;
 import com.cintsoft.ace.business.provider.system.vo.UserRoleResourceVo;
+import com.cintsoft.common.exception.ParameterValidateException;
+import com.cintsoft.common.web.ErrorCodeInfo;
+import com.cintsoft.common.web.ResultBean;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -63,7 +63,7 @@ public class SysRoleUserController {
     @GetMapping("/listUserRole")
     public ResultBean<List<SysRole>> listUserRole(String userId) {
         if (!StringUtils.hasText(userId)) {
-            throw new ParameterValidateException(BusinessCode.USER_ID_EMPTY_ERROR);
+            throw new ParameterValidateException(SysBusinessCode.USER_ID_EMPTY_ERROR.getBusinessCode());
         }
         return ResultBean.restResult(sysRoleUserService.listUserRole(userId), ErrorCodeInfo.OK);
     }
@@ -96,7 +96,7 @@ public class SysRoleUserController {
     @GetMapping("/listRoleUser")
     public ResultBean<List<SysUser>> listRoleUser(String roleId) {
         if (!StringUtils.hasText(roleId)) {
-            throw new ParameterValidateException(BusinessCode.ROLE_ID_EMPTY_ERROR);
+            throw new ParameterValidateException(SysBusinessCode.ROLE_ID_EMPTY_ERROR.getBusinessCode());
         }
         return ResultBean.restResult(sysRoleUserService.listRoleUser(roleId), ErrorCodeInfo.OK);
     }

@@ -1,9 +1,9 @@
 package com.cintsoft.ace.business.provider.system.validator.sys.roleresource;
 
-import com.cintsoft.ace.business.provider.common.exception.BusinessCode;
-import com.cintsoft.ace.business.provider.common.exception.ParameterValidateException;
+import com.cintsoft.ace.business.provider.system.constant.SysBusinessCode;
 import com.cintsoft.ace.business.provider.system.validator.BaseValidator;
 import com.cintsoft.ace.business.provider.system.vo.UserRoleResourceVo;
+import com.cintsoft.common.exception.ParameterValidateException;
 import org.springframework.util.StringUtils;
 
 /**
@@ -16,10 +16,10 @@ import org.springframework.util.StringUtils;
 public class SysRoleResourceValidator extends BaseValidator {
     public static void saveRoleResource(UserRoleResourceVo userRoleResourceVo) {
         if (!StringUtils.hasText(userRoleResourceVo.getRoleId())) {
-            throw new ParameterValidateException(BusinessCode.ROLE_ID_EMPTY_ERROR);
+            throw new ParameterValidateException(SysBusinessCode.ROLE_ID_EMPTY_ERROR.getBusinessCode());
         }
         if (userRoleResourceVo.getResourceIdList() == null) {
-            throw new ParameterValidateException(BusinessCode.RESOURCE_ID_LIST_NOT_EXIST_ERROR);
+            throw new ParameterValidateException(SysBusinessCode.RESOURCE_ID_LIST_NOT_EXIST_ERROR.getBusinessCode());
         }
     }
 }

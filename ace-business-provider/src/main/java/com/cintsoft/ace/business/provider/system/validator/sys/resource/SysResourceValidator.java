@@ -1,9 +1,9 @@
 package com.cintsoft.ace.business.provider.system.validator.sys.resource;
 
-import com.cintsoft.ace.business.provider.common.exception.BusinessCode;
-import com.cintsoft.ace.business.provider.common.exception.ParameterValidateException;
+import com.cintsoft.ace.business.provider.system.constant.SysBusinessCode;
 import com.cintsoft.ace.business.provider.system.model.SysResource;
 import com.cintsoft.ace.business.provider.system.validator.BaseValidator;
+import com.cintsoft.common.exception.ParameterValidateException;
 import org.springframework.util.StringUtils;
 
 /**
@@ -18,19 +18,19 @@ public class SysResourceValidator extends BaseValidator {
 
     public static void insertValidate(SysResource sysResource) {
         if (!StringUtils.hasText(sysResource.getName())) {
-            throw new ParameterValidateException(BusinessCode.RESOURCE_NAME_EMPTY_ERROR);
+            throw new ParameterValidateException(SysBusinessCode.RESOURCE_NAME_EMPTY_ERROR.getBusinessCode());
         }
         if (!StringUtils.hasText(sysResource.getResourceKey())) {
-            throw new ParameterValidateException(BusinessCode.RESOURCE_KEY_EMPTY_ERROR);
+            throw new ParameterValidateException(SysBusinessCode.RESOURCE_KEY_EMPTY_ERROR.getBusinessCode());
         }
         if (!StringUtils.hasText(sysResource.getParentId())) {
-            throw new ParameterValidateException(BusinessCode.PARENT_ID_EMPTY_ERROR);
+            throw new ParameterValidateException(SysBusinessCode.PARENT_ID_EMPTY_ERROR.getBusinessCode());
         }
     }
 
     public static void updateValidate(SysResource sysResource) {
         if (!StringUtils.hasText(sysResource.getId())) {
-            throw new ParameterValidateException(BusinessCode.ID_EMPTY_ERROR);
+            throw new ParameterValidateException(SysBusinessCode.ID_EMPTY_ERROR.getBusinessCode());
         }
         insertValidate(sysResource);
     }

@@ -1,9 +1,9 @@
 package com.cintsoft.ace.business.provider.system.validator.sys.user;
 
-import com.cintsoft.ace.business.provider.common.exception.BusinessCode;
-import com.cintsoft.ace.business.provider.common.exception.ParameterValidateException;
+import com.cintsoft.ace.business.provider.system.constant.SysBusinessCode;
 import com.cintsoft.ace.business.provider.system.model.SysUser;
 import com.cintsoft.ace.business.provider.system.validator.BaseValidator;
+import com.cintsoft.common.exception.ParameterValidateException;
 import org.springframework.util.StringUtils;
 
 /**
@@ -17,19 +17,19 @@ public class SysUserValidator extends BaseValidator {
 
     public static void insertValidate(SysUser sysUser) {
         if (!StringUtils.hasText(sysUser.getUsername())) {
-            throw new ParameterValidateException(BusinessCode.USERNAME_EMPTY_ERROR);
+            throw new ParameterValidateException(SysBusinessCode.USERNAME_EMPTY_ERROR.getBusinessCode());
         }
         if (!StringUtils.hasText(sysUser.getPassword())) {
-            throw new ParameterValidateException(BusinessCode.PASSWORD_EMPTY_ERROR);
+            throw new ParameterValidateException(SysBusinessCode.PASSWORD_EMPTY_ERROR.getBusinessCode());
         }
     }
 
     public static void updateValidate(SysUser sysUser) {
         if (!StringUtils.hasText(sysUser.getId())) {
-            throw new ParameterValidateException(BusinessCode.ID_EMPTY_ERROR);
+            throw new ParameterValidateException(SysBusinessCode.ID_EMPTY_ERROR.getBusinessCode());
         }
         if (!StringUtils.hasText(sysUser.getUsername())) {
-            throw new ParameterValidateException(BusinessCode.USERNAME_EMPTY_ERROR);
+            throw new ParameterValidateException(SysBusinessCode.USERNAME_EMPTY_ERROR.getBusinessCode());
         }
     }
 }

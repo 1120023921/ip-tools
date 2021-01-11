@@ -1,7 +1,7 @@
 package com.cintsoft.ace.business.provider.system.validator;
 
-import com.cintsoft.ace.business.provider.common.exception.BusinessCode;
-import com.cintsoft.ace.business.provider.common.exception.ParameterValidateException;
+import com.cintsoft.ace.business.provider.system.constant.SysBusinessCode;
+import com.cintsoft.common.exception.ParameterValidateException;
 import org.springframework.util.CollectionUtils;
 
 import java.util.List;
@@ -17,7 +17,7 @@ public class BaseValidator {
 
     public static void deleteValidate(List<String> idList) {
         if (CollectionUtils.isEmpty(idList)) {
-            throw new ParameterValidateException(BusinessCode.ID_LIST_EMPTY_ERROR);
+            throw new ParameterValidateException(SysBusinessCode.ID_LIST_EMPTY_ERROR.getBusinessCode());
         }
     }
 }

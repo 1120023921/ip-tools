@@ -3,7 +3,7 @@ package com.cintsoft.ace.business.provider.common.utils.transfer;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cintsoft.ace.business.provider.common.utils.pagination.PaginationUtils;
-import com.cintsoft.ace.business.provider.common.vo.ResultBean;
+import com.cintsoft.common.web.ResultBean;
 
 import java.util.ArrayList;
 import java.util.List;

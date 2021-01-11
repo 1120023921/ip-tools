@@ -1,12 +1,12 @@
 package com.cintsoft.ace.business.provider.system.controller;
 
 
-import com.cintsoft.ace.business.provider.common.enums.ErrorCodeInfo;
-import com.cintsoft.ace.business.provider.common.vo.ResultBean;
 import com.cintsoft.ace.business.provider.system.model.SysResource;
 import com.cintsoft.ace.business.provider.system.service.SysResourceService;
 import com.cintsoft.ace.business.provider.system.validator.sys.resource.SysResourceValidator;
 import com.cintsoft.ace.business.provider.system.vo.SysResourceView;
+import com.cintsoft.common.web.ErrorCodeInfo;
+import com.cintsoft.common.web.ResultBean;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.security.access.prepost.PreAuthorize;

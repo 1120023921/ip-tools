@@ -3,11 +3,11 @@ package com.cintsoft.ace.business.provider.system.controller;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.cintsoft.ace.business.provider.common.enums.ErrorCodeInfo;
-import com.cintsoft.ace.business.provider.common.vo.ResultBean;
 import com.cintsoft.ace.business.provider.system.model.SysUser;
 import com.cintsoft.ace.business.provider.system.service.SysUserService;
 import com.cintsoft.ace.business.provider.system.validator.sys.user.SysUserValidator;
+import com.cintsoft.common.web.ErrorCodeInfo;
+import com.cintsoft.common.web.ResultBean;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.security.access.prepost.PreAuthorize;

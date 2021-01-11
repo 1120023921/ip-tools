@@ -1,4 +1,4 @@
-package com.cintsoft.ace.business.provider.common.exception;
+package com.cintsoft.ace.business.provider.system.constant;
 
 
 /**
@@ -8,7 +8,7 @@ package com.cintsoft.ace.business.provider.common.exception;
  * Time: 10:40
  * Create: DoubleH
  */
-public enum BusinessCode {
+public enum SysBusinessCode {
 
 
     ID_LIST_EMPTY_ERROR(30001, "id列表不能为空"),
@@ -34,19 +34,14 @@ public enum BusinessCode {
     USER_ID_LIST_NOT_EXIST_ERROR(30021, "用户id列表不存在"),
     DIS_NAME_EMPTY_ERROR(30022, "菜单显示名称不能为空");
 
-    private final Integer code;
-    private final String msg;
+    private final com.cintsoft.common.exception.BusinessCode businessCode = new com.cintsoft.common.exception.BusinessCode();
 
-    BusinessCode(Integer code, String msg) {
-        this.code = code;
-        this.msg = msg;
+    SysBusinessCode(Integer code, String msg) {
+        this.businessCode.setCode(code);
+        this.businessCode.setMsg(msg);
     }
 
-    public Integer getCode() {
-        return code;
-    }
-
-    public String getMsg() {
-        return msg;
+    public com.cintsoft.common.exception.BusinessCode getBusinessCode() {
+        return businessCode;
     }
 }

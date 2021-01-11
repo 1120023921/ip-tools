@@ -12,6 +12,6 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-redis'
     implementation 'org.springframework.boot:spring-boot-starter-aop'
     implementation 'com.cintsoft:ace-mybatis-plus-config-starter:2.4'
-    implementation 'com.cintsoft:ace-spring-security-config-starter:2.8'
+    implementation 'com.cintsoft:ace-spring-security-config-starter:3.0'
     compile 'junit:junit:4.12'
 }
