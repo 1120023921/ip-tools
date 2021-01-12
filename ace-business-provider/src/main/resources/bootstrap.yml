@@ -51,7 +51,9 @@ ace:
     tables:
       - visit_sys_menu
   security:
+    tenant-enable: true
     token-expire: 7200
+    default-inMemory-enable: true
     oauth:
       tenant-enable: true
       logout-success-url: http://cintsoft.com

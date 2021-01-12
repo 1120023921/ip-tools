@@ -9,7 +9,6 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringCloudApplication
 @EnableFeignClients
-@ComponentScan({"com.cintsoft"})
 @EnableConfigurationProperties({WebConfig.class})
 public class Application {
 
