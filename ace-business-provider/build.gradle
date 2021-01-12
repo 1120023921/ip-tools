@@ -14,6 +14,6 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'com.cintsoft:ace-mybatis-plus-config-starter:2.4'
     implementation 'com.cintsoft:ace-spring-security-config-starter:3.2'
-    implementation 'com.cintsoft:ace-spring-security-oauth-config-starter:1.8'
+    implementation 'com.cintsoft:ace-spring-security-oauth-config-starter:2.3'
     compile 'junit:junit:4.12'
 }

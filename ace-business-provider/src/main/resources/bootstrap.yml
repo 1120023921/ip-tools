@@ -54,4 +54,4 @@ ace:
     token-expire: 7200
     oauth:
       tenant-enable: true
-      logout-success-url: http://qq.com
+      logout-success-url: http://cintsoft.com
