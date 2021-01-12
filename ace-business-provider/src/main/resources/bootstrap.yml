@@ -52,3 +52,6 @@ ace:
       - visit_sys_menu
   security:
     token-expire: 7200
+    oauth:
+      tenant-enable: true
+      logout-success-url: http://qq.com

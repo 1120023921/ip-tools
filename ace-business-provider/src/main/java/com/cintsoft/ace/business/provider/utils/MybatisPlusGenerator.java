@@ -16,7 +16,7 @@ import java.util.Map;
 
 public class MybatisPlusGenerator {
 
-    private final static String packageName = "com.cintsoft.ace.business.provider.business";
+    private final static String packageName = "com.cintsoft.ace.business.provider.oauth";
     private final static String dbUserName = "root";
     private final static String dbPassword = "!Cint@2019#hz";
     private final static String dbUrl = "jdbc:mysql://mariadb.cintsoft.com:3308/cloud_app_demo";
@@ -25,7 +25,7 @@ public class MybatisPlusGenerator {
     public void getTable() {
 
         boolean serviceNameStartWithI = false;//user -> UserService, 设置成true: user -> IUserService
-        generateByTables(DbType.MYSQL, serviceNameStartWithI, packageName, "ace-business-provider-api", "visit_sys_menu");
+        generateByTables(DbType.MYSQL, serviceNameStartWithI, packageName, "ace-business-provider-api", "sys_oauth_client_details");
     }
 
     private static Map<DbType, String> driverMap = new HashMap<DbType, String>() {
@@ -83,14 +83,14 @@ public class MybatisPlusGenerator {
         focList.add(new FileOutConfig("/templates/mapper.xml.vm") {
             @Override
             public String outputFile(TableInfo tableInfo) {
-                return basePath + "java/com/cintsoft/ace/business/provider/business/dao/" + tableInfo.getEntityName() + ".xml";
+                return basePath + "java/com/cintsoft/ace/business/provider/oauth/dao/" + tableInfo.getEntityName() + ".xml";
             }
         });
         // entity
         focList.add(new FileOutConfig("/templates/entity.java.vm") {
             @Override
             public String outputFile(TableInfo tableInfo) {
-                return baseBizPath + "java/com/cintsoft/ace/business/provider/business/model/" + tableInfo.getEntityName() + ".java";
+                return baseBizPath + "java/com/cintsoft/ace/business/provider/oauth/model/" + tableInfo.getEntityName() + ".java";
             }
         });
 //        controller生成目录
