@@ -26,6 +26,7 @@ allprojects {
 
     dependencies {
         implementation 'org.springframework.boot:spring-boot-starter-web'
+        implementation 'org.springframework.boot:spring-boot-starter-aop'
         implementation 'org.springframework.cloud:spring-cloud-starter'
         implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
         implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
@@ -52,6 +53,9 @@ allprojects {
         dependencies {
             dependency 'com.baomidou:mybatis-plus-boot-starter:3.4.1'
             dependency 'com.baomidou:mybatis-plus-generator:3.4.1'
+            dependency 'com.cintsoft:ace-mybatis-plus-config-starter:1.0'
+            dependency 'com.cintsoft:ace-spring-security-config-starter:1.0'
+            dependency 'com.cintsoft:ace-spring-security-oauth-config-starter:1.0.4'
         }
     }
 

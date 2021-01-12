@@ -10,10 +10,9 @@ dependencies {
     implementation 'com.baomidou:mybatis-plus-generator:3.4.1'
     implementation 'org.springframework.cloud:spring-cloud-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-data-redis'
-    implementation 'org.springframework.boot:spring-boot-starter-aop'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-    implementation 'com.cintsoft:ace-mybatis-plus-config-starter:1.0'
-    implementation 'com.cintsoft:ace-spring-security-config-starter:1.0'
-    implementation 'com.cintsoft:ace-spring-security-oauth-config-starter:1.0'
+    implementation 'com.cintsoft:ace-mybatis-plus-config-starter'
+    implementation 'com.cintsoft:ace-spring-security-config-starter'
+    implementation 'com.cintsoft:ace-spring-security-oauth-config-starter'
     compile 'junit:junit:4.12'
 }
