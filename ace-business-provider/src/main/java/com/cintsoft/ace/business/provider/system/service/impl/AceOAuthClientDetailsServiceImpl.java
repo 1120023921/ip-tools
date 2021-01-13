@@ -49,7 +49,7 @@ public class AceOAuthClientDetailsServiceImpl implements AceOAuthClientDetailsSe
         aceUser.setTenantId(TenantContextHolder.getTenantId());
         aceUser.setUsername(clientDetails.getClientId());
         aceUser.setName(clientDetails.getClientName());
-        final Set<String> roleIdSet = sysRoleOauthClientService.list(Wrappers.<SysRoleOauthClient>lambdaQuery().eq(SysRoleOauthClient::getOauthClientId, clientId))
+        final Set<String> roleIdSet = sysRoleOauthClientService.list(Wrappers.<SysRoleOauthClient>lambdaQuery().eq(SysRoleOauthClient::getOauthClientId, clientDetails.getId()))
                 .stream()
                 .map(SysRoleOauthClient::getRoleId)
                 .collect(Collectors.toSet());
