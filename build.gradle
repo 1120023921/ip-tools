@@ -54,8 +54,8 @@ allprojects {
             dependency 'com.baomidou:mybatis-plus-boot-starter:3.4.1'
             dependency 'com.baomidou:mybatis-plus-generator:3.4.1'
             dependency 'com.cintsoft:ace-mybatis-plus-config-starter:1.0'
-            dependency 'com.cintsoft:ace-spring-security-config-starter:1.0'
-            dependency 'com.cintsoft:ace-spring-security-oauth-config-starter:1.0.4'
+            dependency 'com.cintsoft:ace-spring-security-config-starter:1.1'
+            dependency 'com.cintsoft:ace-spring-security-oauth-config-starter:1.1.8'
         }
     }
 
