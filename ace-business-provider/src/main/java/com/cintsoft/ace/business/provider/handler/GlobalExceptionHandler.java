@@ -4,6 +4,8 @@ import com.cintsoft.common.exception.BusinessException;
 import com.cintsoft.common.exception.ParameterValidateException;
 import com.cintsoft.common.web.ResultBean;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -31,6 +33,20 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public ResultBean<Object> parameterValidateExceptionHandler(ParameterValidateException e) {
         return ResultBean.restResult(null, e.getCode(), e.getMsg());
+    }
+
+    @ExceptionHandler(AuthenticationException.class)
+    @ResponseBody
+    public ResultBean<Object> authenticationExceptionExceptionHandler(AuthenticationException e) {
+        log.error(e.getMessage(), e);
+        return ResultBean.restResult("UNAUTHORIZED", 401, e.getMessage());
+    }
+
+    @ExceptionHandler(AccessDeniedException.class)
+    @ResponseBody
+    public ResultBean<Object> accessDeniedExceptionHandler(AccessDeniedException e) {
+        log.error(e.getMessage(), e);
+        return ResultBean.restResult("FORBIDDEN", 403, e.getMessage());
     }
 
     @ExceptionHandler(Exception.class)

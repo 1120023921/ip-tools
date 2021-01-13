@@ -59,3 +59,11 @@ ace:
       logout-success-url: http://cintsoft.com
       login-page: http://localhost:8080/oauth/authorize
       code-expire: 30
+#日志
+logging:
+  level:
+    com:
+      cintsoft:
+        debug
+  file:
+    path: logs
