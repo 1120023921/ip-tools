@@ -11,7 +11,6 @@ import com.cintsoft.common.web.ResultBean;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -95,20 +94,6 @@ public class SysUserController {
     @PostMapping("/page")
     public ResultBean<Page<SysUser>> page(@RequestParam(defaultValue = "1") Integer pageNum, @RequestParam(defaultValue = "10") Integer pageSize, @RequestBody SysUser sysUser) {
         return ResultBean.restResult(sysUserService.page(new Page<>(pageNum, pageSize), Wrappers.lambdaQuery(sysUser).select(i -> !"password".equals(i.getProperty())).orderByDesc(SysUser::getCreateTime)), ErrorCodeInfo.OK);
-    }
-
-    /**
-     * @description 获取当前登录用户信息
-     * @author 胡昊
-     * @email huhao9277@gmail.com
-     * @date 2020/9/14 9:56
-     */
-    @ApiOperation("获取当前登录用户信息")
-    @PreAuthorize("isAuthenticated()")
-    @GetMapping("/getUserInfo")
-    public ResultBean<SysUser> getUserInfo() {
-        final SysUser sysUser = (SysUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return ResultBean.restResult(sysUser, ErrorCodeInfo.OK);
     }
 }
 
