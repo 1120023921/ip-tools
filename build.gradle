@@ -33,7 +33,7 @@ allprojects {
         implementation 'org.springframework.cloud:spring-cloud-starter-netflix-hystrix'
         implementation 'org.springframework.cloud:spring-cloud-starter-config'
         implementation 'org.apache.velocity:velocity-engine-core:2.2'
-        implementation 'io.springfox:springfox-boot-starter:3.0.0'
+        implementation 'com.github.xiaoymin:knife4j-spring-boot-starter:3.0.2'
         implementation 'com.fasterxml.jackson.core:jackson-databind:2.11.1'
         implementation 'cn.hutool:hutool-all:5.3.9'
         implementation 'com.cintsoft:ace-common-starter:1.0'
@@ -54,8 +54,8 @@ allprojects {
             dependency 'com.baomidou:mybatis-plus-boot-starter:3.4.1'
             dependency 'com.baomidou:mybatis-plus-generator:3.4.1'
             dependency 'com.cintsoft:ace-mybatis-plus-config-starter:1.0'
-            dependency 'com.cintsoft:ace-spring-security-config-starter:1.1'
-            dependency 'com.cintsoft:ace-spring-security-oauth-config-starter:1.1.8'
+            dependency 'com.cintsoft:ace-spring-security-config-starter:1.2.3'
+            dependency 'com.cintsoft:ace-spring-security-oauth-config-starter:1.2.3'
         }
     }
 

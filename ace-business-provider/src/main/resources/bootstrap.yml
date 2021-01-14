@@ -44,6 +44,9 @@ eureka:
   client:
     service-url:
       defaultZone: http://cint:cint@ace-eureka:8701/eureka/
+knife4j:
+  setting:
+    enableRequestCache: false
 ace:
   tenant:
     enable: true
