@@ -59,14 +59,7 @@ allprojects {
         }
     }
 
-    processResources {
-        from('src/main/java') {
-            include '**/*'
-        }
-        from('src/main/resources') {
-            include '**/*'
-        }
-    }
+    sourceSets.main.resources.srcDirs = ["src/main/java", "src/main/resources"]
 
     configurations {
         compileOnly {
