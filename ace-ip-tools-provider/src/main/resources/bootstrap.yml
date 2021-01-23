@@ -1,0 +1,58 @@
+server:
+  port: 8080
+  tomcat:
+    basedir: D:/tmp
+spring:
+  application:
+    name: ace-business-provider
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: '1120023921Hh'
+    url: jdbc:mysql://ip.wingice.com:3306/ip_tools?useUnicode=true&characterEncoding=utf8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&serverTimezone=Asia/Shanghai&transformedBitIsBoolean=true
+  servlet:
+    multipart:
+      max-file-size: 500MB
+      max-request-size: 500MB
+  redis:
+    host: ip.wingice.com
+    password: 1120023921Hh
+    database: 0
+  profiles:
+    active: prod
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+web:
+  upload: file:D:/
+  mapping: /file/**
+knife4j:
+  setting:
+    enableRequestCache: false
+ace:
+  tenant:
+    enable: false
+    column: tenant_id
+    tables:
+      - visit_sys_menu
+  security:
+    tenant-enable: false
+    token-expire: 7200
+    default-inMemory-enable: true
+    oauth:
+      tenant-enable: true
+      logout-success-url: http://cintsoft.com
+      login-page: http://localhost:8080/oauth/authorize
+      code-expire: 30
+#日志
+logging:
+  level:
+    com:
+      cintsoft:
+        debug
+  file:
+    path: logs
+ip:
+  db-file: E:/IdeaProjects/ip2region/data/ip2region.db

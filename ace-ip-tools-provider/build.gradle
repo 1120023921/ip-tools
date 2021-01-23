@@ -1,0 +1,19 @@
+description('业务服务')
+
+compileJava.options.encoding = 'UTF-8'
+
+compileTestJava.options.encoding = 'UTF-8'
+
+dependencies {
+    compile project(':ace-ip-tools-provider-api')
+    implementation 'com.baomidou:mybatis-plus-boot-starter:3.4.1'
+    implementation 'com.baomidou:mybatis-plus-generator:3.4.1'
+    implementation 'org.springframework.cloud:spring-cloud-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'com.cintsoft:ace-mybatis-plus-config-starter'
+    implementation 'com.cintsoft:ace-spring-security-config-starter'
+    implementation 'com.cintsoft:ace-spring-security-oauth-config-starter'
+    implementation 'org.lionsoul:ip2region:1.7.2'
+    compile 'junit:junit:4.12'
+}
