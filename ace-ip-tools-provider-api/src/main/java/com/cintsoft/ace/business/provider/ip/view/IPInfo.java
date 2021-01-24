@@ -7,8 +7,10 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode
 public class IPInfo {
 
+    private String ip;
     private String country;
     private String province;
     private String city;
     private String isp;
+    private String state;
 }

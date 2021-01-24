@@ -16,17 +16,19 @@ public class IPServiceImpl implements IPService {
     private DbSearcher dbSearcher;
 
     @Override
-    public IPInfo getInfo(String ip) {
+    public IPInfo getInfo(String ip, String state) {
         try {
             final Method method = dbSearcher.getClass().getMethod("btreeSearch", String.class);
             final DataBlock dataBlock = (DataBlock) method.invoke(dbSearcher, ip);
             if (dataBlock != null) {
                 final IPInfo ipInfo = new IPInfo();
                 final String[] region = dataBlock.getRegion().split("\\|");
+                ipInfo.setIp(ip);
                 ipInfo.setCountry(region[0]);
                 ipInfo.setProvince(region[2]);
                 ipInfo.setCity(region[3]);
                 ipInfo.setIsp(region[4]);
+                ipInfo.setState(state);
                 return ipInfo;
             }
         } catch (Exception e) {

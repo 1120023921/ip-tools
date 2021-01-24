@@ -20,7 +20,7 @@ public class IPController {
     private IPService ipService;
 
     @GetMapping("/getInfo")
-    public ResultBean<IPInfo> getInfo(String ip) {
-        return ResultBean.restResult(ipService.getInfo(ip), ErrorCodeInfo.OK);
+    public ResultBean<IPInfo> getInfo(String ip, String state) {
+        return ResultBean.restResult(ipService.getInfo(ip, state), ErrorCodeInfo.OK);
     }
 }
